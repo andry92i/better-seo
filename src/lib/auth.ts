@@ -1,0 +1,23 @@
+import { betterAuth } from "better-auth";
+import { prismaAdapter } from "better-auth/adapters/prisma";
+import { db } from "@/lib/db";
+
+const googleConfigured = Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
+
+export const auth = betterAuth({
+  database: prismaAdapter(db, { provider: "postgresql" }),
+  emailAndPassword: { enabled: true },
+  socialProviders: googleConfigured ? {
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      accessType: "offline",
+      prompt: "select_account consent",
+      scope: [
+        "https://www.googleapis.com/auth/webmasters.readonly",
+        "https://www.googleapis.com/auth/analytics.readonly",
+      ],
+    },
+  } : {},
+  trustedOrigins: process.env.BETTER_AUTH_URL ? [process.env.BETTER_AUTH_URL] : [],
+});

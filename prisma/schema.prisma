@@ -1,0 +1,197 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum SeoLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+enum BusinessType {
+  SAAS
+  ECOMMERCE
+  LOCAL_SERVICE
+  PUBLISHER
+  AGENCY
+}
+
+enum AuditStatus {
+  QUEUED
+  CRAWLING
+  ANALYZING
+  COMPLETE
+  FAILED
+}
+
+enum FindingImpact {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum ArtifactFormat {
+  MARKDOWN
+  DOCX
+  XLSX
+}
+
+model User {
+  id            String    @id
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+  projects      Project[]
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId])
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?   @db.Text
+  refreshToken          String?   @db.Text
+  idToken               String?   @db.Text
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  @@index([userId])
+  @@unique([providerId, accountId])
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@index([identifier])
+}
+
+model Project {
+  id               String       @id @default(cuid())
+  userId           String
+  user             User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name             String
+  websiteUrl       String
+  role             String?
+  seoLevel         SeoLevel?
+  businessType     BusinessType?
+  goals            String[]
+  gscProperty      String?
+  ga4Property      String?
+  onboardingDone   Boolean      @default(false)
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  competitors      Competitor[]
+  audits            Audit[]
+  conversations    Conversation[]
+  artifacts        Artifact[]
+  @@index([userId])
+}
+
+model Competitor {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  domain    String
+  source    String
+  overlap   Float?
+  selected  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  @@unique([projectId, domain])
+}
+
+model Audit {
+  id          String        @id @default(cuid())
+  projectId   String
+  project     Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  status      AuditStatus   @default(QUEUED)
+  score       Int?
+  startedAt   DateTime?
+  completedAt DateTime?
+  rawEvidence Json?
+  findings    Finding[]
+  createdAt   DateTime      @default(now())
+  @@index([projectId, createdAt])
+}
+
+model Finding {
+  id          String        @id @default(cuid())
+  auditId     String
+  audit       Audit         @relation(fields: [auditId], references: [id], onDelete: Cascade)
+  category    String
+  title       String
+  description String        @db.Text
+  evidence    Json?
+  impact      FindingImpact
+  confidence  Float
+  effort      Int
+  status      String        @default("OPEN")
+  createdAt   DateTime      @default(now())
+  @@index([auditId, impact])
+}
+
+model Conversation {
+  id        String    @id @default(cuid())
+  projectId String
+  project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title     String
+  workflow  String
+  messages  Message[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  @@index([projectId, updatedAt])
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role           String
+  parts          Json
+  createdAt      DateTime     @default(now())
+  @@index([conversationId, createdAt])
+}
+
+model Artifact {
+  id        String         @id @default(cuid())
+  projectId String
+  project   Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name      String
+  format    ArtifactFormat
+  storageKey String
+  metadata  Json?
+  createdAt DateTime       @default(now())
+  @@index([projectId, createdAt])
+}

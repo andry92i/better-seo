@@ -9,9 +9,31 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/react": "^4.0.94",
+    "@prisma/client": "^6.19.3",
+    "@streamdown/cjk": "^1.0.3",
+    "@streamdown/code": "^1.1.1",
+    "@streamdown/math": "^1.0.2",
+    "@streamdown/mermaid": "^1.0.2",
+    "@tanstack/react-query": "^5.102.8",
+    "ai": "^7.0.91",
+    "better-auth": "^1.7.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "docx": "^9.7.1",
+    "lucide-react": "^1.39.0",
     "next": "16.3.4",
+    "next-safe-action": "^8.6.1",
+    "next-themes": "^0.4.6",
+    "prisma": "^6.19.3",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "streamdown": "^2.6.0",
+    "tailwind-merge": "^3.6.0",
+    "use-stick-to-bottom": "^1.1.6",
+    "xlsx": "^0.18.5",
+    "zod": "^4.5.4",
+    "zustand": "^5.0.15"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
