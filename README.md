@@ -61,6 +61,14 @@ pnpm exec prisma generate
 
 ## Architecture et limites
 
+### Intégration documentaire active
+
+Le chat utilise désormais un bundle versionné des instructions Claude SEO et 12 workflows. Le mode démo produit un plan de collecte contextualisé. Un agent AI SDK réel, désactivé par défaut, peut consulter les instructions et références via des outils documentaires. Il requiert Better Auth et une configuration fournisseur. Les exports utilisent la réponse affichée.
+
+**Cela n’active pas les crawlers, les spécialistes natifs Claude Code ni les MCP Google automatiquement.** Le dashboard reste une démonstration. Consulter [l’analyse approfondie et la feuille de route](docs/CLAUDE-SEO-INTEGRATION.md) pour la couverture exacte, la configuration et les conditions de production.
+
+Validation : `pnpm build` puis `pnpm test:seo` (Node.js 24). Actualisation documentaire après revue du sous-module : `pnpm seo:sync`.
+
 Consultez [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Le MVP fournit le parcours, les contrats et une simulation fonctionnelle. Un service de crawl durable, les files de travaux, le stockage objet, le chiffrement applicatif des tokens et les fournisseurs SEO payants restent à brancher avant une mise en production multi-client.
 
 ## Sources ouvertes

@@ -1,54 +1,50 @@
-import { createUIMessageStream, createUIMessageStreamResponse, type UIMessage } from "ai";
+import { createAgentUIStreamResponse, createUIMessageStream, createUIMessageStreamResponse } from 'ai';
+import { chatRequestSchema } from '@/lib/ai/request';
+import { createSeoAgent } from '@/lib/ai/seo-agent';
+import { demoReport } from '@/lib/ai/demo';
+import { selectWorkflow } from '@/lib/claude-seo/workflows';
+import { readBoundedJson } from '@/lib/http';
 
-export const runtime = "nodejs";
-
-const report = [
-  "## Stratégie recommandée",
-  "",
-  "### 1. Priorité immédiate — gains rapides",
-  "",
-  "Optimisez d’abord les pages qui génèrent déjà des impressions en positions **8 à 20**. C’est le segment où une amélioration on-page produit généralement le retour le plus rapide.",
-  "",
-  "- Réaligner le title sur l’intention dominante",
-  "- Renforcer les premiers 150 mots avec une réponse directe",
-  "- Ajouter 3 à 5 liens internes depuis les pages fortes",
-  "- Consolider les pages qui se cannibalisent",
-  "",
-  "### 2. Preuves à suivre",
-  "",
-  "| Signal | Situation | Cible |",
-  "|---|---:|---:|",
-  "| CTR moyen | 1,4 % | 2,5 % |",
-  "| Position moyenne | 14,2 | < 10 |",
-  "| Pages concernées | 14 | 14 optimisées |",
-  "",
-  "### 3. Plan d’exécution",
-  "",
-  "**Cette semaine :** corriger les métadonnées, le maillage et les données structurées.",
-  "",
-  "**Sous 30 jours :** publier les pages manquantes du cluster et obtenir les premiers liens pertinents.",
-  "",
-  "**Sous 90 jours :** mesurer les cohortes de pages, conserver ce qui progresse et retravailler le reste.",
-  "",
-  "> Confiance : élevée. Cette démonstration utilise des données simulées; connectez GSC et GA4 pour obtenir les URLs, requêtes et estimations propres au projet.",
-].join("\n");
+export const runtime = 'nodejs';
+export const maxDuration = 120;
 
 export async function POST(request: Request) {
-  const body = await request.json() as { messages?: UIMessage[]; action?: string };
-  const stream = createUIMessageStream<UIMessage>({
-    originalMessages: body.messages,
-    async execute({ writer }) {
+  let body;
+  try { body = chatRequestSchema.parse(await readBoundedJson(request)); }
+  catch { return Response.json({ error: 'Requête invalide ou trop volumineuse.' }, { status: 400 }); }
+  const question = body.messages.at(-1)!.parts.map(part => part.text).join('\n');
+  const workflow = selectWorkflow(body.action, question);
+  if (body.mode === 'live') {
+    if (process.env.SEO_LIVE_ENABLED !== 'true' || !process.env.SEO_MODEL || !process.env.AI_GATEWAY_API_KEY || !process.env.DATABASE_URL || !process.env.BETTER_AUTH_SECRET) {
+      return Response.json({ error: 'Mode réel non configuré.' }, { status: 503 });
+    }
+    if (!process.env.BETTER_AUTH_URL || request.headers.get('origin') !== new URL(process.env.BETTER_AUTH_URL).origin) {
+      return Response.json({ error: 'Origine refusée.' }, { status: 403 });
+    }
+    try {
+      const { auth } = await import('@/lib/auth');
+      const session = await auth.api.getSession({ headers: request.headers });
+      if (!session) return Response.json({ error: 'Connexion requise.' }, { status: 401 });
+      return await createAgentUIStreamResponse({
+        agent: createSeoAgent(process.env.SEO_MODEL, workflow, body.profile),
+        uiMessages: body.messages,
+        abortSignal: request.signal,
+        timeout: 100000,
+        onError: () => 'Analyse interrompue. Aucun résultat ne doit être considéré comme validé.',
+      });
+    } catch {
+      return Response.json({ error: 'Service IA indisponible. Aucun rapport simulé substitué.' }, { status: 502 });
+    }
+  }
+  const report = demoReport(body, workflow);
+  const stream = createUIMessageStream({
+    execute({ writer }) {
       const id = crypto.randomUUID();
-      writer.write({ type: "text-start", id });
-      const chunks = report.match(/.{1,48}(?:\s|$)/g) ?? [report];
-      for (const delta of chunks) {
-        writer.write({ type: "text-delta", id, delta });
-        await new Promise((resolve) => setTimeout(resolve, 12));
-      }
-      writer.write({ type: "text-end", id });
-      writer.setOutcome({ status: "completed" });
+      writer.write({ type: 'text-start', id });
+      for (let i = 0; i < report.length; i += 96) writer.write({ type: 'text-delta', id, delta: report.slice(i, i + 96) });
+      writer.write({ type: 'text-end', id });
+      writer.setOutcome({ status: 'completed' });
     },
-    onError: () => "La simulation n’a pas pu produire le rapport.",
   });
   return createUIMessageStreamResponse({ stream });
 }

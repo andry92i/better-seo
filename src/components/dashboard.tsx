@@ -16,7 +16,8 @@ const metrics = [
 export function Dashboard() {
   return (
     <div className="space-y-7">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"><div><Badge><Sparkles className="size-3" /> Analyse Claude SEO</Badge><h1 className="mt-3 text-3xl font-semibold tracking-[-0.03em]">Bonjour Andry, voici où agir.</h1><p className="mt-1.5 text-sm text-muted-foreground">Les données des 28 derniers jours ont été analysées et priorisées.</p></div><Button variant="outline"><CalendarClock className="size-4" /> 28 derniers jours</Button></div>
+      <p role="status" className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">Tableau de démonstration : tous les chiffres, concurrents, scores et constats ci-dessous sont fictifs. Aucun audit réel ni connexion Google effectués.</p>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"><div><Badge><Sparkles className="size-3" /> Analyse Claude SEO</Badge><h1 className="mt-3 text-3xl font-semibold tracking-[-0.03em]">Explorez votre espace SEO.</h1><p className="mt-1.5 text-sm text-muted-foreground">Exemples de résultats sur une période fictive de 28 jours.</p></div><Button variant="outline"><CalendarClock className="size-4" /> 28 derniers jours</Button></div>
 
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">{metrics.map((metric) => <Card key={metric.label}><CardContent className="p-5"><div className="flex items-center justify-between"><span className="grid size-9 place-items-center rounded-lg bg-secondary"><metric.icon className="size-4" /></span><span className="text-xs font-medium text-primary">{metric.delta}</span></div><p className="mt-5 text-2xl font-semibold tracking-tight">{metric.value}</p><p className="mt-1 text-xs text-muted-foreground">{metric.label}</p></CardContent></Card>)}</div>
 
