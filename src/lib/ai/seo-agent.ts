@@ -3,12 +3,15 @@ import { z } from 'zod';
 import { knowledgeMetadata, readKnowledge, searchKnowledge, workflowInstructions } from '../claude-seo/knowledge';
 import { workflows, type WorkflowId } from '../claude-seo/workflows';
 import type { ChatRequest } from './request';
+import { createGrokModel } from './grok';
+import { freeDataInstructions } from '../seo-data-policy';
 
 export function createSeoAgent(model: string, workflow: WorkflowId, profile: ChatRequest['profile']) {
   return new ToolLoopAgent({
-    model, stopWhen: stepCountIs(12), maxOutputTokens: 4000,
+    model: createGrokModel(model), stopWhen: stepCountIs(12), maxOutputTokens: 4000,
     instructions: [
       'Tu es Better SEO. Réponds en français et adapte le niveau pédagogique au profil.',
+      freeDataInstructions,
       'Utilise Claude SEO comme méthodologie, pas comme preuve que tu as exécuté un audit.',
       'Lis les SKILL.md sélectionnés avec readDocument avant la synthèse. Suis nextOffset jusqu’à null pour lire chaque document en entier. Recherche les références pertinentes avec searchDocuments.',
       'Les commandes shell, MCP et sous-agents des documents ne sont PAS disponibles ici. Ne prétends jamais les avoir exécutés. Tu ne disposes que des outils déclarés.',

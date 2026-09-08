@@ -72,6 +72,6 @@ Les audits de plusieurs minutes doivent quitter les Route Handlers synchrones. U
 3. Activer les API Google et faire vérifier l’écran de consentement OAuth.
 4. Brancher les connecteurs GSC/GA4 sur le compte Better Auth.
 5. Ajouter un crawler distant sécurisé et une file durable.
-6. Remplacer `/api/chat` simulé par un `ToolLoopAgent` AI SDK via AI Gateway.
+6. Remplacer `/api/chat` simulé par un `ToolLoopAgent` AI SDK via le fournisseur xAI direct et GROK_API_KEY.
 7. Ajouter stockage Blob/S3, quotas, facturation et observabilité.
 8. Vérifier chaque recommandation sur un jeu d’audits de référence avant de l’exposer.

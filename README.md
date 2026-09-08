@@ -14,7 +14,7 @@ Better SEO est un prototype SaaS d’ingénieur SEO IA fondé sur les workflows 
 - schéma PostgreSQL Prisma 6 pour utilisateurs, projets, audits, preuves, conversations et artefacts ;
 - Better Auth avec email/mot de passe et Google OAuth ;
 - scopes GSC et GA4 en lecture seule ;
-- contrat de connecteurs MCP pour GSC, GA4, PageSpeed, DataForSEO et Ahrefs ;
+- catalogue de sources gratuites : GSC, GA4, PageSpeed, CrUX et exports Google ; Grok via xAI en direct ;
 - Claude SEO complet conservé comme sous-module Git.
 
 ## Stack

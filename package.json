@@ -4,14 +4,15 @@
   "private": true,
   "scripts": {
     "seo:sync": "node scripts/sync-seo-knowledge.mjs",
-    "test:seo": "node --test tests/seo.test.mjs",
-    "dev": "next dev",
-    "build": "next build",
+    "test:seo": "node --test tests/seo.test.mjs tests/free-sources.test.mjs",
+    "dev": "node scripts/dev.mjs",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
     "@ai-sdk/react": "^4.0.94",
+    "@ai-sdk/xai": "^4.0.54",
     "@prisma/client": "^6.19.3",
     "@streamdown/cjk": "^1.0.3",
     "@streamdown/code": "^1.1.1",

@@ -1,13 +1,17 @@
-export type SeoConnector = "google-search-console" | "google-analytics" | "pagespeed" | "dataforseo" | "ahrefs";
+import { freeDataPolicy } from '../seo-data-policy';
 
-export type McpConnectorStatus = { connector: SeoConnector; configured: boolean; mode: "oauth" | "api-key" | "public" };
-
-export function getConnectorStatuses(): McpConnectorStatus[] {
-  return [
-    { connector: "google-search-console", configured: Boolean(process.env.GOOGLE_CLIENT_ID), mode: "oauth" },
-    { connector: "google-analytics", configured: Boolean(process.env.GOOGLE_CLIENT_ID), mode: "oauth" },
-    { connector: "pagespeed", configured: Boolean(process.env.GOOGLE_PAGESPEED_API_KEY), mode: "public" },
-    { connector: "dataforseo", configured: Boolean(process.env.DATAFORSEO_LOGIN), mode: "api-key" },
-    { connector: "ahrefs", configured: Boolean(process.env.AHREFS_API_KEY), mode: "api-key" },
-  ];
+// Infrastructure configuration does not establish a user OAuth connection.
+export function getConnectorStatuses() {
+  const oauthConfigured = Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
+  return freeDataPolicy.sources.map(source => ({
+    connector: source.id,
+    configured: source.id === 'google-search-console' || source.id === 'google-analytics'
+      ? oauthConfigured : source.id === 'pagespeed'
+      ? Boolean(process.env.GOOGLE_PAGESPEED_API_KEY) : source.id === 'crux'
+      ? Boolean(process.env.GOOGLE_CRUX_API_KEY) : false,
+    connected: false,
+    implemented: false,
+    mode: source.access,
+    status: source.id === 'gsc-links-export' || source.id === 'google-trends' ? 'manual-export-planned' : 'not-connected',
+  }));
 }

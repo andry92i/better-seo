@@ -6,6 +6,7 @@ export function demoReport(input: ChatRequest, workflow: WorkflowId) {
   return [
     `## ${spec.title} — préparation de l’analyse`,
     '> Démonstration déterministe : aucun modèle Grok ni service SEO appelé. Ceci est un plan de collecte, pas un audit du site.',
+    'Sources SEO gratuites uniquement : Google Search Console, GA4, PageSpeed, CrUX et exports fournis. Les appels Grok réels nécessitent une clé xAI et sont facturés séparément.',
     `Site déclaré : ${input.profile.websiteUrl || 'non renseigné'}. Activité : ${input.profile.businessType || 'à préciser'}. Niveau : ${input.profile.seoLevel || 'à préciser'}.`,
     `Objectifs déclarés : ${input.profile.goals.join(', ') || 'à préciser'}.`,
     `Concurrents déclarés, non vérifiés : ${input.profile.competitors.join(', ') || 'aucun'}.`,

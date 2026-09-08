@@ -17,9 +17,9 @@ import type { SeoAgentMessage } from "@/lib/ai/seo-agent";
 
 type Capabilities = { knowledge: { version: string; documents: number; skills: string[]; agents: string[] }; execution: { liveConfigured: boolean } };
 
-export function SeoChat({ action }: { action: string }) {
+export function SeoChat({ action, initialPrompt = "" }: { action: string; initialPrompt?:string }) {
   const profile = useAppStore(state => state.profile);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(initialPrompt);
   const [mode, setMode] = useState<"demo" | "live">("demo");
   const [exportError, setExportError] = useState("");
   const [exporting, setExporting] = useState(false);

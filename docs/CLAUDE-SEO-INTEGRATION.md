@@ -17,7 +17,7 @@ Le sous-module était présent, mais aucune route ne lisait ses instructions. Le
 
 ## Activation de l’IA réelle (environnement privé de validation)
 
-Configurer PostgreSQL et Better Auth, appliquer le schéma et connecter un utilisateur. Définir `SEO_LIVE_ENABLED=true`, `AI_GATEWAY_API_KEY`, `SEO_MODEL` (identifiant fournisseur/modèle réellement disponible dans votre catalogue Gateway), `BETTER_AUTH_URL` et `DATABASE_URL`. Aucun identifiant « Grok 4.6 » n’est supposé réel. La case du chat active l’envoi du profil et de la conversation au fournisseur configuré. Le changement de mode efface la conversation affichée pour ne pas mélanger des sorties de démonstration avec une analyse réelle.
+Configurer PostgreSQL et Better Auth, appliquer le schéma et connecter un utilisateur. Définir `SEO_LIVE_ENABLED=true`, `GROK_API_KEY`, `SEO_MODEL=grok-4.6` (identifiant du modèle xAI, sans préfixe fournisseur), `BETTER_AUTH_URL` et `DATABASE_URL`. Le modèle `grok-4.6` est documenté par xAI au 7 septembre 2026. Les appels sont facturés par xAI ; les sources SEO sélectionnées sont gratuites. La case du chat active l’envoi du profil et de la conversation au fournisseur configuré. Le changement de mode efface la conversation affichée pour ne pas mélanger des sorties de démonstration avec une analyse réelle.
 
 Le mode réel n’a pas été testé contre un fournisseur payant lors de cette livraison. Ne pas l’ouvrir au public avant des quotas distribués, un budget par tenant, une limitation de concurrence et des évaluations adversariales des prompts. Les limites par requête ne constituent pas un budget global.
 
@@ -26,7 +26,7 @@ Le mode réel n’a pas été testé contre un fournisseur payant lors de cette 
 | Fonction | Maintenant | Pour une analyse réelle complète |
 |---|---|---|
 | Recherche de mots-clés | Instructions, plan de collecte, agent documentaire | GSC + fournisseur de SERP/volumes ; pays/langue ; coûts bornés |
-| Concurrence et backlinks | Workflows et références | Index externe Ahrefs/DataForSEO, concurrents validés |
+| Concurrence et backlinks | Workflows et références | Exports Liens GSC partiels et contenus publics de concurrents validés |
 | Audit technique | Méthodologie consultable | Worker de crawl HTTP + navigateur isolé, protections SSRF et DNS-rebinding, robots, limites et preuves |
 | SEO local | Instructions local/maps | GBP OAuth, adresses vérifiées, grilles de positions |
 | Rédaction/on-page | Agent réel configurable, profil utilisateur | Contenu source, faits commerciaux, validation humaine, persistance |

@@ -4,6 +4,7 @@ import { createSeoAgent } from '@/lib/ai/seo-agent';
 import { demoReport } from '@/lib/ai/demo';
 import { selectWorkflow } from '@/lib/claude-seo/workflows';
 import { readBoundedJson } from '@/lib/http';
+import { getSeoConfig } from '@/lib/ai/config';
 
 export const runtime = 'nodejs';
 export const maxDuration = 120;
@@ -15,7 +16,8 @@ export async function POST(request: Request) {
   const question = body.messages.at(-1)!.parts.map(part => part.text).join('\n');
   const workflow = selectWorkflow(body.action, question);
   if (body.mode === 'live') {
-    if (process.env.SEO_LIVE_ENABLED !== 'true' || !process.env.SEO_MODEL || !process.env.AI_GATEWAY_API_KEY || !process.env.DATABASE_URL || !process.env.BETTER_AUTH_SECRET) {
+    const config = getSeoConfig();
+    if (!config.liveConfigured) {
       return Response.json({ error: 'Mode réel non configuré.' }, { status: 503 });
     }
     if (!process.env.BETTER_AUTH_URL || request.headers.get('origin') !== new URL(process.env.BETTER_AUTH_URL).origin) {
@@ -26,7 +28,7 @@ export async function POST(request: Request) {
       const session = await auth.api.getSession({ headers: request.headers });
       if (!session) return Response.json({ error: 'Connexion requise.' }, { status: 401 });
       return await createAgentUIStreamResponse({
-        agent: createSeoAgent(process.env.SEO_MODEL, workflow, body.profile),
+        agent: createSeoAgent(config.model, workflow, body.profile),
         uiMessages: body.messages,
         abortSignal: request.signal,
         timeout: 100000,
