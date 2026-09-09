@@ -2,6 +2,7 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { db } from "@/lib/db";
 import { nextCookies } from "better-auth/next-js";
+import { lastLoginMethod } from "better-auth/plugins";
 
 const googleConfigured = Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
 
@@ -26,5 +27,6 @@ export const auth = betterAuth({
   trustedOrigins: process.env.BETTER_AUTH_URL ? [process.env.BETTER_AUTH_URL] : [],
   plugins: [
     nextCookies(),
+    lastLoginMethod(),
   ],
 });
