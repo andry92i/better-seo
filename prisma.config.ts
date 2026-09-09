@@ -7,4 +7,5 @@ export default {
   migrations: {
     path: "prisma/migrations",
   },
+  earlyAccess: true,
 } satisfies PrismaConfig;
