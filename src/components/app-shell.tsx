@@ -6,7 +6,7 @@ import { BarChart3, Bot, FileText, Globe2, LayoutDashboard, Link2, Menu, Search,
 import { Brand } from "@/components/brand";
 import { Button } from "@/components/ui/button";
 import { useAppStore } from "@/lib/store";
-import { cn } from "@/lib/utils";
+import { cn } from "cn";
 const navigation = [
 {href:"/dashboard",label:"Vue d’ensemble",icon:LayoutDashboard},
 {href:"/dashboard/keywords",label:"Mots-clés",icon:Search},

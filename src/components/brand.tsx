@@ -1,5 +1,5 @@
 import { SearchCheck } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "cn";
 
 export function Brand({ compact = false, className }: { compact?: boolean; className?: string }) {
   return (

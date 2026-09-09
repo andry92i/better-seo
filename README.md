@@ -32,7 +32,7 @@ pnpm prisma generate
 pnpm dev --hostname 127.0.0.1
 ```
 
-Le parcours de démonstration fonctionne sans base ni clés API. Pour activer l’authentification et les données réelles, configurez au minimum `DATABASE_URL`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `GOOGLE_CLIENT_ID` et `GOOGLE_CLIENT_SECRET`.
+Le parcours de démonstration fonctionne sans base ni clés API. Pour activer l’authentification et les données réelles, configurez au minimum `DATABASE_URL` (URL Accelerate `prisma://` ou `prisma+postgres://`, pas un `postgresql://` direct), `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `GOOGLE_CLIENT_ID` et `GOOGLE_CLIENT_SECRET`.
 
 ## Google OAuth
 

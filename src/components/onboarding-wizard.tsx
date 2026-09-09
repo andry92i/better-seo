@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
-import { cn } from "@/lib/utils";
+import { cn } from "cn";
 import { competitors } from "@/lib/mock-data";
 import { useAppStore } from "@/lib/store";
 import type { BusinessType, SeoLevel } from "@/lib/types";
