@@ -1,6 +1,6 @@
 import { Document, Packer, Paragraph, HeadingLevel } from "docx";
 import * as XLSX from "xlsx";
-export async function exportDocument(content: string, format: "md" | "docx" | "xlsx") {
+export async function exportDocument(content: string, format: "md" | "docx" | "xlsx", locale: "en" | "fr" = "en") {
   if (format === "md") return { body: content, type: "text/markdown; charset=utf-8" };
   if (format === "docx") {
     const headings = [HeadingLevel.HEADING_1, HeadingLevel.HEADING_2, HeadingLevel.HEADING_3];
@@ -14,12 +14,13 @@ export async function exportDocument(content: string, format: "md" | "docx" | "x
   }
   const book = XLSX.utils.book_new();
   const rows = content.split("\n").map((text, i) => [String(i+1), text]);
-  const sheet = XLSX.utils.aoa_to_sheet([["Ligne", "Contenu exact du résultat"], ...rows]);
+  const sheet = XLSX.utils.aoa_to_sheet([locale === "fr" ? ["Ligne", "Contenu exact du résultat"] : ["Line", "Exact result content"], ...rows]);
   sheet["!cols"] = [{wch:8}, {wch:110}];
-  XLSX.utils.book_append_sheet(book, sheet, "Résultat");
+  XLSX.utils.book_append_sheet(book, sheet, locale === "fr" ? "Résultat" : "Result");
   // Markdown tables also become usable spreadsheet columns. All content stays literal.
   const tableRows = content.split("\n").filter(line => /^\s*\|/.test(line) && !/^\s*\|[\s:|-]+$/.test(line))
     .map(line => line.trim().replace(/^\||\|$/g, "").split("|").map(cell => cell.trim()));
-  if (tableRows.length) XLSX.utils.book_append_sheet(book, XLSX.utils.aoa_to_sheet(tableRows), "Tableaux");
+  if (tableRows.length) XLSX.utils.book_append_sheet(book, XLSX.utils.aoa_to_sheet(tableRows), locale === "fr" ? "Tableaux" : "Tables");
   return { body: new Uint8Array(XLSX.write(book, {bookType:"xlsx",type:"buffer"})), type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" };
 }
+

@@ -1,3 +1,4 @@
+import { serverCopy } from "@/i18n/server-copy";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { z } from "zod";
@@ -23,11 +24,13 @@ export async function ownedProject(userId: string, id: string) {
   if (!project) throw new HttpError(404, "Projet introuvable.");
   return project;
 }
-export function apiError(error: unknown) {
-  if (error instanceof RequestBodyError) return Response.json({ error: "Corps de requête absent, invalide ou trop volumineux." }, { status: 400 });
-  if (error instanceof HttpError) return Response.json({ error: error.message }, { status: error.status });
-  if (error instanceof z.ZodError) return Response.json({ error: "Vérifiez les champs du formulaire." }, { status: 400 });
+export async function apiError(error: unknown) {
+  const copy = await serverCopy();
+  if (error instanceof RequestBodyError) return Response.json({ error: copy("Corps de requête absent, invalide ou trop volumineux.") }, { status: 400 });
+  if (error instanceof HttpError) return Response.json({ error: copy(error.message) }, { status: error.status });
+  if (error instanceof z.ZodError) return Response.json({ error: copy("Vérifiez les champs du formulaire.") }, { status: 400 });
   // Never expose upstream messages, database URLs or OAuth tokens.
   console.error("better-seo request failed", error instanceof Error ? error.name : "UnknownError");
-  return Response.json({ error: "Service indisponible. Réessayez dans un instant." }, { status: 503 });
+  return Response.json({ error: copy("Service indisponible. Réessayez dans un instant.") }, { status: 503 });
 }
+

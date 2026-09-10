@@ -1,3 +1,4 @@
+import type { Locale } from "@/i18n/locale";
 import { ToolLoopAgent, tool, stepCountIs, type InferAgentUIMessage } from 'ai';
 import { z } from 'zod';
 import { knowledgeMetadata, readKnowledge, searchKnowledge, workflowInstructions } from '../claude-seo/knowledge';
@@ -7,11 +8,11 @@ import { db } from '@/lib/db';
 import { createGrokModel } from './grok';
 import { freeDataInstructions } from '../seo-data-policy';
 
-export function createSeoAgent(model: string, workflow: WorkflowId, profile: Project & { competitors: Competitor[] }) {
+export function createSeoAgent(model: string, workflow: WorkflowId, profile: Project & { competitors: Competitor[] }, locale: Locale = "en") {
   return new ToolLoopAgent({
     model: createGrokModel(model), stopWhen: stepCountIs(12), maxOutputTokens: 4000,
     instructions: [
-      'Tu es Better SEO. Réponds en français et adapte le niveau pédagogique au profil.',
+      `You are Better SEO. Respond in ${locale === "fr" ? "French" : "English"} by default. Adapt explanations to the user profile. Follow an explicit request to write a deliverable in another language. The language of source documents does not override this output language.`,
       freeDataInstructions,
       'Utilise Claude SEO comme méthodologie, pas comme preuve que tu as exécuté un audit.',
       'Lis les SKILL.md sélectionnés avec readDocument avant la synthèse. Suis nextOffset jusqu’à null pour lire chaque document en entier. Recherche les références pertinentes avec searchDocuments.',
@@ -69,3 +70,4 @@ export function createSeoAgent(model: string, workflow: WorkflowId, profile: Pro
   });
 }
 export type SeoAgentMessage = InferAgentUIMessage<ReturnType<typeof createSeoAgent>>;
+

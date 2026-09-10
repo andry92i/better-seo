@@ -61,3 +61,23 @@ test("workspace routes require login and marketing pages remain public",async()=
   }
   for(const path of ["/","/login","/signup"]) assert.equal((await fetch(origin+path)).status,200,path);
 });
+
+
+test("browser language and explicit preference control server-rendered pages",async()=>{
+  for(const [headers,language,phrase] of [
+    [{},"en","Your data."],
+    [{"Accept-Language":"fr-CA,fr;q=0.9,en;q=0.5"},"fr","Vos données."],
+    [{"Accept-Language":"fr;q=0.2,en-GB;q=0.9"},"en","Your data."],
+    [{"Accept-Language":"fr",Cookie:"better-seo-locale=en"},"en","Your data."],
+    [{"Accept-Language":"ja",Cookie:"better-seo-locale=../../bad"},"en","Your data."],
+  ]) {
+    const html=await(await fetch(origin,{headers})).text();
+    assert.ok(html.includes(`lang="${language}"`));assert.ok(html.includes(phrase));
+    assert.doesNotMatch(html,/MISSING_MESSAGE|INVALID_MESSAGE/);
+  }
+  for(const [language,phrase]of [["en","Welcome back."],["fr","Heureux de vous retrouver."]]){
+    const html=await(await fetch(origin+"/login",{headers:{"Accept-Language":language}})).text();assert.ok(html.includes(phrase));
+    const error=await(await fetch(origin+"/api/projects",{headers:{"Accept-Language":language}})).json();
+    assert.equal(error.error,language==="fr"?"Connectez-vous pour accéder à votre projet.":"Sign in to access your project.");
+  }
+});

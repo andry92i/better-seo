@@ -40,9 +40,15 @@ test("exports preserve content and never turn user strings into Excel formulas",
   const result=await exportDocument(content,format);
   assert.equal(Buffer.from(result.body).subarray(0,2).toString(),"PK");
   if(format==="xlsx") {
-   const book=XLSX.read(result.body);const cell=book.Sheets["Résultat"].B4;
+   const book=XLSX.read(result.body);const cell=book.Sheets["Result"].B4;
    assert.equal(cell.t,"s");assert.equal(cell.f,undefined);assert.equal(cell.v,content.split("\n")[2]);
-   assert.equal(book.Sheets["Tableaux"].A2.v,"Fix title");
+   assert.equal(book.Sheets["Tables"].A2.v,"Fix title");
   }
  }
+});
+
+
+test("French spreadsheet export localizes sheet names without changing content",async()=>{
+ const result=await exportDocument("Bonjour","xlsx","fr");
+ const book=XLSX.read(result.body);assert.equal(book.Sheets["Résultat"].B2.v,"Bonjour");
 });

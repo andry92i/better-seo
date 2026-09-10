@@ -104,3 +104,25 @@ html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
 .data-table th { padding: 16px 20px; color: var(--muted-foreground); font-weight: 500; background: var(--muted); white-space: nowrap; }
 .data-table td { padding: 16px 20px; border-top: 1px solid var(--border); max-width: 380px; overflow-wrap: anywhere; }
 .data-table tbody tr:hover { background: var(--muted); }
+
+
+/* Class-based themes must follow next-themes, not the OS media query alone. */
+@custom-variant dark (&:where(.dark, .dark *));
+:root { --muted-foreground: #536477; --destructive: #b42318; }
+.dark { --background: #101821; --foreground: #edf2f8; --card: #172331; --card-foreground: #edf2f8; --muted-foreground: #b2c0d1; --destructive: #ffb4ab; --border: #344356; --input: #4d5e73; }
+html { color-scheme: light; }
+html.dark { color-scheme: dark; }
+main, section, article, form, fieldset { min-width: 0; }
+h1, h2, h3 { overflow-wrap: break-word; text-wrap: balance; }
+button:focus-visible, textarea:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
+.data-table th { font-size: 12px; letter-spacing: .02em; }
+.data-table td { vertical-align: top; }
+.table-scroll { overflow-x: auto; overscroll-behavior-x: contain; }
+.chat-message { overflow-wrap: anywhere; }
+.chat-message pre { max-width: 100%; overflow-x: auto; }
+.chat-message table { display: block; max-width: 100%; overflow-x: auto; }
+.chat-message [data-streamdown="table-wrapper"] { max-width: 100%; }
+@media (max-width: 639px) {
+  input, textarea, select.form-select { font-size: 16px; }
+  .data-table td, .data-table th { padding: 12px; }
+}
