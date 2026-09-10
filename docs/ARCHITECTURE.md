@@ -1,77 +1,29 @@
-# Architecture Better SEO
+# Architecture
 
-## Principe central
+## Parcours
 
-Claude SEO est conçu pour Claude Code et un environnement local Python/Git. Une Function Vercel ne doit pas démarrer Claude Code ni traiter ses fichiers comme une bibliothèque serveur. Better SEO sépare donc :
+Better Auth crée les comptes et sessions PostgreSQL. Les layouts privés vérifient la session. Chaque route de projet, conversation, audit et import vérifie l’utilisateur propriétaire ; les mutations vérifient aussi l’origine.
 
-1. la source Claude SEO, versionnée comme sous-module MIT ;
-2. un manifeste TypeScript de spécialistes et règles de preuve ;
-3. un orchestrateur AI SDK pour les conversations ;
-4. des workers durables à ajouter pour les audits longs ;
-5. des connecteurs OAuth/API isolés de la logique de recommandation.
+Le questionnaire crée ou modifie un projet en base. Son brouillon est conservé dans la session du navigateur pendant le retour OAuth, associé à l’utilisateur et expirant après 30 minutes. TanStack Query charge la liste des projets puis les détails du projet sélectionné ; Zustand conserve uniquement la sélection en mémoire.
 
-## Flux utilisateur
+## Collecte
 
-```mermaid
-flowchart TD
-  A[Inscription] --> B[Onboarding personnalisé]
-  B --> C[Consentement GSC et GA4]
-  C --> D[Crawl et collecte]
-  D --> E[Audit multi-spécialiste]
-  E --> F[Dashboard priorisé]
-  F --> G[Workspace conversationnel]
-  G --> H[MD, DOCX ou XLSX]
-```
+`runAudit` enregistre un audit CRAWLING avec exclusion des audits déjà actifs dans une transaction sérialisable. Les sources indépendantes sont collectées en parallèle : HTML, GSC, GA4, PageSpeed/CrUX et pages concurrentes. Chaque source conserve un statut ; l’échec d’une source ne fabrique pas de données pour les autres.
 
-## Modules
+Le crawler borne le nombre de pages, les délais, les redirections et la taille de réponse. Il vérifie les adresses DNS publiques et fixe l’adresse vérifiée sur la connexion HTTPS pour éviter le rebinding DNS. Robots.txt est respecté. Les limites et erreurs sont enregistrées.
 
-| Module | Responsabilité | État MVP |
-|---|---|---|
-| Better Auth | sessions, comptes Google, scopes | préparé |
-| Prisma/PostgreSQL | projets, audits, preuves, conversations | schéma livré |
-| Collector | GSC, GA4, PageSpeed, crawl | contrats + GSC client |
-| Claude SEO manifest | disciplines, pondérations, politique de preuve | livré |
-| Audit orchestrator | distribuer, agréger, dédupliquer, scorer | simulation UI |
-| Chat AI SDK | approfondir un workflow et produire un résultat | streaming simulé |
-| Artifact service | produire et stocker les livrables | MD/DOCX/XLSX livrés |
+Les preuves et constats sont enregistrés dans Audit/Finding. Les constats disposent d’un état OPEN/DONE modifiable par une action authentifiée next-safe-action. Un audit COMPLETE signifie que des données ont été collectées, pas que toutes les sources sont exhaustives ou que le site a passé tous les contrôles.
 
-## Actions proposées dans le dashboard
+## Analyse et contenus
 
-- quick wins GSC en positions 8–20 ;
-- carte de mots-clés par intention et cluster ;
-- détection de cannibalisation ;
-- content gap et comparaison concurrentielle ;
-- plan éditorial sur 90 jours ;
-- réécriture humanisée de pages ;
-- sprint d’audit technique ;
-- schema et maillage interne ;
-- backlink gap et prospection ;
-- SEO local et cohérence NAP ;
-- GEO/AEO et citabilité des passages ;
-- monitoring de dérive SEO.
+L’agent AI SDK utilise xAI directement avec Grok. Il dispose de trois outils : recherche documentaire, lecture documentaire paginée et lecture des preuves du projet autorisé. Les sources volumineuses sont paginées. Le contexte récupéré est traité comme non fiable ; il n’accorde aucun droit supplémentaire.
 
-## Modèle d’exécution production
+Les messages sont persistés ; l’historique provient du serveur et ne fait pas confiance aux messages système ou résultats d’outils envoyés par le client. Les exports contiennent le texte affiché. Word applique les niveaux de titres ; Excel conserve les valeurs comme chaînes, y compris celles commençant par un signe égal.
 
-Les audits de plusieurs minutes doivent quitter les Route Handlers synchrones. Utilisez une file durable avec des étapes idempotentes : `COLLECT → CRAWL → ANALYZE → VERIFY → PRIORITIZE → PUBLISH`. Chaque étape écrit ses preuves et peut reprendre après échec. L’interface suit la progression via polling TanStack Query ou Server-Sent Events.
+## Stockage et exploitation
 
-## Sécurité
+Prisma 6.19.3 utilise le moteur standard pour PostgreSQL direct et l’extension Accelerate pour les URL Prisma. La génération du client est faite au build. Les modèles métiers existants sont conservés ; aucune suppression de données ni reset de base n’est nécessaire pour cette mise à jour.
 
-- OAuth Google en lecture seule et consentement explicite ;
-- tokens chiffrés avec une clé KMS avant persistance ;
-- séparation stricte par `userId` et `projectId` ;
-- protection SSRF du crawler avec résolution DNS et blocage des réseaux privés ;
-- validation Zod de toutes les entrées ;
-- journaux sans tokens ni contenu sensible ;
-- suppression et révocation depuis les paramètres ;
-- preuve et niveau de confiance visibles pour chaque recommandation.
+Les preuves complètes restent en base. L’API du dashboard retourne un extrait borné pour éviter des réponses massives sur Vercel. Aucun token Google ni secret de fournisseur n’est renvoyé au navigateur.
 
-## Passage de la simulation au réel
-
-1. Créer PostgreSQL et appliquer la migration Prisma.
-2. Configurer Better Auth et l’écran de connexion.
-3. Activer les API Google et faire vérifier l’écran de consentement OAuth.
-4. Brancher les connecteurs GSC/GA4 sur le compte Better Auth.
-5. Ajouter un crawler distant sécurisé et une file durable.
-6. Remplacer `/api/chat` simulé par un `ToolLoopAgent` AI SDK via le fournisseur xAI direct et GROK_API_KEY.
-7. Ajouter stockage Blob/S3, quotas, facturation et observabilité.
-8. Vérifier chaque recommandation sur un jeu d’audits de référence avant de l’exposer.
+L’exécution des audits reste synchrone et bornée à la durée de la fonction Vercel. Une interruption nécessite une relance ; le verrou expire après cinq minutes. Ce n’est pas encore une file de jobs durable, un ordonnanceur automatique ou un système de facturation multi-client.

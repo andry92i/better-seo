@@ -1,3 +1,5 @@
+> Document de conception initial. Pour la couverture exécutée actuelle, consulter README.md et CLAUDE-SEO-INTEGRATION.md. Le mode démo décrit ci-dessous a été supprimé.
+
 # Better SEO : stratégie Google gratuite et Grok direct
 
 Analyse du 7 septembre 2026. Périmètre : parcours publics de ChatSEO, documentation Google/xAI et code Claude SEO versionné dans ce projet. Aucun compte ChatSEO privé testé. Les promesses commerciales citées ne constituent pas une validation indépendante des résultats.

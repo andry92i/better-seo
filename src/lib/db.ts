@@ -1,20 +1,14 @@
-import { PrismaClient } from "@/generated/prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { withAccelerate } from "@prisma/extension-accelerate";
 
-const createPrismaClient = () => {
+function createClient(): PrismaClient {
+  const client = new PrismaClient();
   const url = process.env.DATABASE_URL ?? "";
-  if (!url.startsWith("prisma://") && !url.startsWith("prisma+postgres://")) {
-    throw new Error(
-      'DATABASE_URL must be a Prisma Accelerate URL (prisma:// or prisma+postgres://). Direct PostgreSQL URLs are not supported with engineType = "client".',
-    );
-  }
-  return new PrismaClient().$extends(withAccelerate());
-};
-
-type DbClient = ReturnType<typeof createPrismaClient>;
-
-const globalForPrisma = globalThis as unknown as { prisma?: DbClient };
-
-export const db = globalForPrisma.prisma ?? createPrismaClient();
-
+  return /^(prisma|prisma\+postgres):/.test(url)
+    ? client.$extends(withAccelerate()) as unknown as PrismaClient
+    : client;
+}
+const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
+// Construction is lazy with respect to database connections, including at build time.
+export const db = globalForPrisma.prisma ?? createClient();
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = db;

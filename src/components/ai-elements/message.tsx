@@ -8,7 +8,7 @@ import { mermaid } from "@streamdown/mermaid";
 import type { UIMessage } from "ai";
 import { memo, type ComponentProps, type HTMLAttributes } from "react";
 import { Streamdown } from "streamdown";
-import { cn } from "cn";
+import { cn } from "@/lib/utils";
 
 export function Message({ className, from, ...props }: HTMLAttributes<HTMLDivElement> & { from: UIMessage["role"] }) {
   return <div className={cn("group flex w-full max-w-[94%] flex-col gap-2", from === "user" ? "ml-auto items-end" : "items-start", className)} {...props} />;

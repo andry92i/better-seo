@@ -5,8 +5,8 @@ import { freeDataPolicy } from '@/lib/seo-data-policy';
 export const dynamic = 'force-dynamic';
 export function GET() {
   return Response.json({ knowledge: knowledgeMetadata, workflows,
-    execution: { demo: true, ...getSeoConfig(), tools: ['searchDocuments', 'readDocument'] },
+    execution: { ...getSeoConfig(), tools: ['searchDocuments', 'readDocument', 'getProjectEvidence'] },
     dataPolicy: freeDataPolicy,
-    data: { crawl: 'not_connected', gsc: 'not_connected', ga4: 'not_connected', serp: 'not_connected', backlinks: 'not_connected' },
+    data: { crawl: 'server_html', gsc: 'oauth', ga4: 'oauth', serp: 'manual_only', backlinks: 'csv_import' },
   });
 }

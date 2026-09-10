@@ -1,52 +1,43 @@
-import { createAgentUIStreamResponse, createUIMessageStream, createUIMessageStreamResponse } from 'ai';
-import { chatRequestSchema } from '@/lib/ai/request';
-import { createSeoAgent } from '@/lib/ai/seo-agent';
-import { demoReport } from '@/lib/ai/demo';
-import { selectWorkflow } from '@/lib/claude-seo/workflows';
-import { readBoundedJson } from '@/lib/http';
-import { getSeoConfig } from '@/lib/ai/config';
-
-export const runtime = 'nodejs';
-export const maxDuration = 120;
-
+import { createAgentUIStreamResponse } from "ai";
+import { chatRequestSchema } from "@/lib/ai/request";
+import { createSeoAgent } from "@/lib/ai/seo-agent";
+import { selectWorkflow } from "@/lib/claude-seo/workflows";
+import { readBoundedJson } from "@/lib/http";
+import { getSeoConfig } from "@/lib/ai/config";
+import { requireUser, ownedProject, apiError, HttpError } from "@/lib/server-access";
+import { db } from "@/lib/db";
+export const runtime = "nodejs";
+export const maxDuration = 300;
 export async function POST(request: Request) {
-  let body;
-  try { body = chatRequestSchema.parse(await readBoundedJson(request)); }
-  catch { return Response.json({ error: 'Requête invalide ou trop volumineuse.' }, { status: 400 }); }
-  const question = body.messages.at(-1)!.parts.map(part => part.text).join('\n');
-  const workflow = selectWorkflow(body.action, question);
-  if (body.mode === 'live') {
+  try {
+    const user = await requireUser(request, true);
+    const body = chatRequestSchema.parse(await readBoundedJson(request));
     const config = getSeoConfig();
-    if (!config.liveConfigured) {
-      return Response.json({ error: 'Mode réel non configuré.' }, { status: 503 });
-    }
-    if (!process.env.BETTER_AUTH_URL || request.headers.get('origin') !== new URL(process.env.BETTER_AUTH_URL).origin) {
-      return Response.json({ error: 'Origine refusée.' }, { status: 403 });
-    }
-    try {
-      const { auth } = await import('@/lib/auth');
-      const session = await auth.api.getSession({ headers: request.headers });
-      if (!session) return Response.json({ error: 'Connexion requise.' }, { status: 401 });
-      return await createAgentUIStreamResponse({
-        agent: createSeoAgent(config.model, workflow, body.profile),
-        uiMessages: body.messages,
-        abortSignal: request.signal,
-        timeout: 100000,
-        onError: () => 'Analyse interrompue. Aucun résultat ne doit être considéré comme validé.',
-      });
-    } catch {
-      return Response.json({ error: 'Service IA indisponible. Aucun rapport simulé substitué.' }, { status: 502 });
-    }
-  }
-  const report = demoReport(body, workflow);
-  const stream = createUIMessageStream({
-    execute({ writer }) {
-      const id = crypto.randomUUID();
-      writer.write({ type: 'text-start', id });
-      for (let i = 0; i < report.length; i += 96) writer.write({ type: 'text-delta', id, delta: report.slice(i, i + 96) });
-      writer.write({ type: 'text-end', id });
-      writer.setOutcome({ status: 'completed' });
-    },
-  });
-  return createUIMessageStreamResponse({ stream });
+    if (!config.liveConfigured) throw new HttpError(503, "Configurez GROK_API_KEY, SEO_MODEL et SEO_LIVE_ENABLED sur le serveur.");
+    const project = await ownedProject(user.id, body.projectId);
+    const last = body.messages.at(-1)!;
+    const question = last.parts.map(p => p.text).join("\n");
+    const workflow = selectWorkflow(body.action, question);
+    const recent = await db.message.count({ where: { conversation: { project: { userId: user.id } }, role: "user", createdAt: { gt: new Date(Date.now() - 60000) } } });
+    if (recent >= 8) throw new HttpError(429, "Trop de demandes. Réessayez dans une minute.");
+    const conversation = body.conversationId
+      ? await db.conversation.findFirst({ where: { id: body.conversationId, projectId: project.id } })
+      : await db.conversation.create({ data: { projectId: project.id, workflow, title: question.slice(0, 100) } });
+    if (!conversation) throw new HttpError(404, "Conversation introuvable.");
+    const previous = await db.message.findMany({ where: { conversationId: conversation.id }, orderBy: { createdAt: "desc" }, take: 20 });
+    await db.message.create({ data: { conversationId: conversation.id, role: "user", parts: last.parts } });
+    // Replay server-owned text only; ignore client-supplied history and tool outputs.
+    const history = previous.reverse().map(m => ({ id: m.id, role: m.role as "user" | "assistant", parts: (m.parts as { type: string; text: string }[]).filter(p => p.type === "text") })).filter(m => m.parts.length);
+    return await createAgentUIStreamResponse({
+      agent: createSeoAgent(config.model, workflow, project),
+      uiMessages: [...history, last], timeout: 240000, abortSignal: request.signal,
+      headers: { "X-Conversation-Id": conversation.id, "Cache-Control": "no-store" },
+      onEnd: async ({ responseMessage }) => {
+        const parts = responseMessage.parts.filter(p => p.type === "text");
+        if (parts.length) await db.message.create({ data: { conversationId: conversation.id, role: "assistant", parts: JSON.parse(JSON.stringify(parts)) } });
+        await db.conversation.update({ where: { id: conversation.id }, data: { updatedAt: new Date() } });
+      },
+      onError: () => "Analyse interrompue. Vérifiez la disponibilité et le quota du modèle Grok configuré.",
+    });
+  } catch (error) { return apiError(error); }
 }
