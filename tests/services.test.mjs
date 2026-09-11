@@ -90,3 +90,9 @@ test("writing skills are complete, paginated and allowlisted",async()=>{
  assert.equal(loadWritingSkill('../../.env').status,'unavailable');
  assert.equal(loadWritingSkill('humanizer/SKILL.md',-1).status,'unavailable');
 });
+
+test("production canonical never inherits a localhost auth origin",async()=>{
+ const {canonicalOrigin}=await import('../src/lib/site.ts');
+ for(const value of ['http://localhost:3000','https://localhost','not a URL','https://user:password@example.org','https://preview.internal']) assert.equal(canonicalOrigin(value),'https://better-seo-five.vercel.app');
+ assert.equal(canonicalOrigin('https://www.example.org/path'),'https://www.example.org');
+});
