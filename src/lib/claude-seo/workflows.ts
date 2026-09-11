@@ -15,8 +15,8 @@ export const workflows = {
 export type WorkflowId = keyof typeof workflows;
 export function selectWorkflow(action: string, question: string): WorkflowId {
   // Explicit slash commands override the workspace; natural questions retain its context.
-  const command = question.match(/^\/seo\s+(\S+)/i)?.[1]?.toLowerCase();
-  const commands: Record<string, WorkflowId> = { audit: 'technical-sprint', technical: 'technical-sprint', local: 'local-seo', maps: 'local-seo', backlinks: 'backlinks', geo: 'ai-search', hreflang: 'international', ecommerce: 'ecommerce', drift: 'monitoring', plan: 'content-plan', cluster: 'keyword-research', page: 'rewrite-landing', content: 'rewrite-landing' };
+  const command = question.match(/^\/seo(?:\s+|-)([a-z-]+)\b/i)?.[1]?.toLowerCase();
+  const commands: Record<string, WorkflowId> = { schema: 'technical-sprint', sitemap: 'technical-sprint', images: 'technical-sprint', 'content-brief': 'content-plan', 'competitor-pages': 'competitor-gap', programmatic: 'ecommerce', google: 'quick-wins', sxo: 'quick-wins', flow: 'content-plan', audit: 'technical-sprint', technical: 'technical-sprint', local: 'local-seo', maps: 'local-seo', backlinks: 'backlinks', geo: 'ai-search', hreflang: 'international', ecommerce: 'ecommerce', drift: 'monitoring', plan: 'content-plan', cluster: 'keyword-research', page: 'rewrite-landing', content: 'rewrite-landing' };
   if (command && commands[command]) return commands[command];
   return Object.hasOwn(workflows, action) ? action as WorkflowId : 'content-plan';
 }

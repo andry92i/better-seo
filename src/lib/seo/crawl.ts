@@ -20,7 +20,7 @@ export function inspectHtml(url: string, html: string, status = 200, xRobots = "
   const evidence = {
     url, status, title: $("title").first().text().trim(), description: $('meta[name="description"]').attr("content") ?? "",
     h1: $("h1").map((_, el) => $(el).text().trim()).get(),
-    canonical: $('link[rel="canonical"]').attr("href") ?? "",
+    canonical: $('link[rel="canonical" i]').attr("href") ?? "",
     robots: [$('meta[name="robots"]').attr("content") ?? "", xRobots].join(" "),
     images: $("img").length, missingAlt: $("img:not([alt])").length,
     internalLinks: [...new Set(links.filter(href => new URL(href).origin === origin))].slice(0, 200),

@@ -65,3 +65,28 @@ test("spreadsheet exports keep separate tables and escaped pipes intact",async()
  assert.equal(book.Sheets.Tables.A2.v,"A | B");assert.equal(book.Sheets.Tables.B2.t,"s");assert.equal(book.Sheets.Tables.B2.f,undefined);
  assert.equal((await exportDocument(content,"txt")).body,content);
 });
+
+test("upstream canonical case fix handles mixed-case rel attributes",()=>{
+ const p=inspectHtml("https://example.org",'<link REL="Canonical" href="https://example.org/"><h1>Example</h1>');
+ assert.equal(p.canonical,"https://example.org/");
+});
+test("cover commands route both supported slash spellings",async()=>{
+ const {selectWorkflow}=await import('../src/lib/claude-seo/workflows.ts');
+ for(const prefix of ['/seo ', '/seo-']) {
+  assert.equal(selectWorkflow('content-plan',prefix+'schema example.com'),'technical-sprint');
+  assert.equal(selectWorkflow('content-plan',prefix+'backlinks rival.com'),'backlinks');
+  assert.equal(selectWorkflow('content-plan',prefix+'geo my homepage'),'ai-search');
+ }
+});
+test("writing skills are complete, paginated and allowlisted",async()=>{
+ const {loadWritingSkill}=await import('../src/lib/ai/writing-skills.ts');
+ const {createHash}=await import('node:crypto');
+ for(const id of ['copywriting/SKILL.md','humanizer/SKILL.md']) {
+  let offset=0, content='', result;
+  do {result=loadWritingSkill(id,offset);content+=result.content;offset=result.nextOffset;} while(offset!==null);
+  assert.equal(createHash('sha256').update(content).digest('hex'),result.sha256);
+  assert.ok(content.length>5000);
+ }
+ assert.equal(loadWritingSkill('../../.env').status,'unavailable');
+ assert.equal(loadWritingSkill('humanizer/SKILL.md',-1).status,'unavailable');
+});

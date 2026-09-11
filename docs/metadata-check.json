@@ -1,0 +1,21 @@
+{
+  "pages": [
+    {
+      "url": "https://better-seo-five.vercel.app",
+      "title": "Better SEO \u2014 Your AI SEO engineer",
+      "description": "Turn Search Console and Analytics data into a prioritized SEO strategy and measurable actions.",
+      "templated": false,
+      "severity": "none",
+      "cta_phrase": null,
+      "flags": [],
+      "signals": []
+    }
+  ],
+  "pages_checked": 1,
+  "templated_count": 0,
+  "templated_ratio": 0.0,
+  "shared_cta_phrases": {},
+  "site_flags": [],
+  "site_risk": "low",
+  "method": "heuristic"
+}

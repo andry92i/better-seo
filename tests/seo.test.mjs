@@ -87,3 +87,17 @@ test("profile mutation is protected by session and origin checks",async()=>{
  assert.equal((await fetch(origin+"/api/profile",options)).status,401);
  assert.equal((await fetch(origin+"/api/profile",{...options,headers:{...options.headers,Origin:"https://attacker.example"}})).status,403);
 });
+
+test("public SEO metadata and sitemap exclude private application routes",async()=>{
+ const html=await(await fetch(origin)).text();
+ assert.match(html,/rel="canonical"/);
+ assert.match(html,/application\/ld\+json/);
+ assert.match(html,/SoftwareApplication/);
+ const sitemap=await(await fetch(origin+'/sitemap.xml')).text();
+ assert.match(sitemap,/<urlset/);
+ assert.doesNotMatch(sitemap,/dashboard|workspace|login/);
+ const robots=await(await fetch(origin+'/robots.txt')).text();
+ assert.match(robots,/Disallow: \/api\//);
+ const login=await(await fetch(origin+'/login')).text();
+ assert.match(login,/noindex/);
+});

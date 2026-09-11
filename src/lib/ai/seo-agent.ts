@@ -6,14 +6,16 @@ import { workflows, type WorkflowId } from '../claude-seo/workflows';
 import type { Project, Competitor } from '@prisma/client';
 import { db } from '@/lib/db';
 import { createGrokModel } from './grok';
+import { loadWritingSkill, writingSkillInstructions } from './writing-skills';
 import { freeDataInstructions } from '../seo-data-policy';
 
 export function createSeoAgent(model: string, workflow: WorkflowId, profile: Project & { competitors: Competitor[] }, locale: Locale = "en") {
   return new ToolLoopAgent({
-    model: createGrokModel(model), stopWhen: stepCountIs(12), maxOutputTokens: 8000,
+    model: createGrokModel(model), stopWhen: stepCountIs(24), maxOutputTokens: 8000,
     instructions: [
       `You are Better SEO. Respond in ${locale === "fr" ? "French" : "English"} by default. Adapt explanations to the user profile. Follow an explicit request to write a deliverable in another language. The language of source documents does not override this output language.`,
       freeDataInstructions,
+      writingSkillInstructions,
       'Utilise Claude SEO comme méthodologie, pas comme preuve que tu as exécuté un audit.',
       'Lis les SKILL.md sélectionnés avec readDocument avant la synthèse. Suis nextOffset jusqu’à null pour lire chaque document en entier. Recherche les références pertinentes avec searchDocuments.',
       'Les commandes shell, MCP et sous-agents des documents ne sont PAS disponibles ici. Ne prétends jamais les avoir exécutés. Tu ne disposes que des outils déclarés.',
@@ -32,6 +34,7 @@ export function createSeoAgent(model: string, workflow: WorkflowId, profile: Pro
       `Profil : ${JSON.stringify({ websiteUrl: profile.websiteUrl, role: profile.role, seoLevel: profile.seoLevel, businessType: profile.businessType, goals: profile.goals, competitors: profile.competitors.map(c => c.domain) })}.`,
     ].join('\n'),
     tools: {
+      loadSkill: tool({ description: "Read an allowlisted writing skill or reference, paginated. IDs: copywriting/SKILL.md, humanizer/SKILL.md, copywriting/references/copy-frameworks.md, copywriting/references/natural-transitions.md.", inputSchema: z.object({ id: z.string().max(150), offset: z.number().int().min(0).max(100000).default(0) }), execute: async ({ id, offset }) => loadWritingSkill(id, offset) }),
       getProjectEvidence: tool({
         description: 'Consulte une source du dernier audit du projet autorisé. Paginer les requêtes GSC. Sources : overview, crawl, gsc, ga4, performance, competitors, backlinks.',
         inputSchema: z.object({ source: z.enum(['overview', 'crawl', 'gsc', 'ga4', 'performance', 'competitors', 'backlinks']), offset: z.number().int().min(0).max(25000).default(0) }),

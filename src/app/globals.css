@@ -157,3 +157,14 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--ring); o
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 }
+
+/* Connected workspace: contain tables, long URLs and generated content on mobile. */
+.connected-page > *, .connected-page [data-slot="card"] { min-width: 0; }
+.connected-page [data-slot="card"] { box-shadow: none; }
+.connected-page p, .chat-message { overflow-wrap: anywhere; }
+.chat-message pre { max-width: 100%; overflow-x: auto; }
+.chat-message table { font-size: .875rem; }
+@media (max-width: 639px) {
+  .connected-page .data-table { min-width: 36rem; }
+  .connected-page h2 { overflow-wrap: anywhere; }
+}

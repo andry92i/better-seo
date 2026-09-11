@@ -1,5 +1,6 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
+import { siteUrl } from "@/lib/site";
 import type { Metadata } from "next";
 import { Providers } from "@/components/providers";
 import "./globals.css";
@@ -10,6 +11,7 @@ import NextTopLoader from "nextjs-toploader";
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   return {
+    metadataBase: new URL(siteUrl),
     title: { default: locale === "fr" ? "Better SEO — Votre ingénieur SEO IA" : "Better SEO — Your AI SEO engineer", template: "%s · Better SEO" },
     description: locale === "fr" ? "Transformez vos données Search Console et Analytics en stratégie SEO priorisée et actions mesurables." : "Turn Search Console and Analytics data into a prioritized SEO strategy and measurable actions.",
   };

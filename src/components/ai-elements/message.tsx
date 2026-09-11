@@ -11,11 +11,11 @@ import { Streamdown } from "streamdown";
 import { cn } from "@/lib/utils";
 
 export function Message({ className, from, ...props }: HTMLAttributes<HTMLDivElement> & { from: UIMessage["role"] }) {
-  return <div className={cn("group flex w-full max-w-[94%] flex-col gap-2", from === "user" ? "is-user ml-auto items-end" : "items-start", className)} {...props} />;
+  return <div className={cn("group flex w-full max-w-full flex-col gap-2", from === "user" ? "is-user ml-auto max-w-[88%] items-end" : "items-start", className)} {...props} />;
 }
 
 export function MessageContent({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("chat-message min-w-0 max-w-full text-sm leading-7 group-[.is-user]:rounded-2xl group-[.is-user]:bg-accent group-[.is-user]:px-5 group-[.is-user]:py-4 group-[.is-user]:text-accent-foreground", className)} {...props} />;
+  return <div className={cn("chat-message min-w-0 max-w-full text-base leading-7 group-[.is-user]:rounded-2xl group-[.is-user]:bg-muted group-[.is-user]:px-5 group-[.is-user]:py-4 group-[.is-user]:text-foreground", className)} {...props} />;
 }
 
 const plugins = { cjk, code, math, mermaid };
