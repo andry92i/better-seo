@@ -12,6 +12,7 @@ import { workflows } from "@/lib/claude-seo/workflows";
 import { ProjectEditor } from "./project-editor";
 import { FindingStatus } from "./finding-status";
 import { PerformanceSummary } from "./performance-summary";
+import { ConnectionHealth } from "./connection-health";
 import { SectionTabs } from "./section-tabs";
 import { DashboardOverview } from "./dashboard-overview";
 import { Button } from "./ui/button";
@@ -52,6 +53,7 @@ const titles: Record<Section,string> = { overview:t("your_growth_in_perspective_
     {audit?.status==="FAILED"&&<p role="alert" className="rounded-lg border border-destructive/30 p-4 text-sm">{t("data_collection_failed_check_the_85c56f")}</p>}
     <div className="flex flex-wrap gap-6 border-y py-4"><SourceState name="Search Console" status={evidence?.gsc?.status}/><SourceState name="Analytics" status={evidence?.ga4?.status}/><SourceState name="Crawl HTML" status={evidence?.crawl?.status}/></div>
     <SectionTabs section={section}/>
+    {section==="integrations"&&<ConnectionHealth/>}
     {(section==="integrations"||section==="settings")?<ProjectEditor key={project.id+section} project={project}/>:
     section==="overview"?<DashboardOverview project={project}/>:section==="keywords"?<>
       <div className="flex flex-wrap gap-4"><div className="relative max-w-md flex-1"><Search className="absolute left-3 top-3 size-4 text-muted-foreground"/><Input className="pl-10" placeholder={t("filter_queries_bfa231")} aria-label={t("filter_queries_c9aa4f")} value={search} onChange={e=>setSearch(e.target.value)}/></div><Link href={go("keyword-research")}><Button variant="outline">{t("build_my_strategy_3471e0")}</Button></Link></div>
@@ -76,4 +78,5 @@ const titles: Record<Section,string> = { overview:t("your_growth_in_perspective_
     </>:actions}
   </div>;
 }
+
 

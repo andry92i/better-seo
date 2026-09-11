@@ -1,3 +1,4 @@
+import { appOrigin } from "./app-origin";
 import { serverCopy } from "@/i18n/server-copy";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
@@ -10,7 +11,7 @@ export class HttpError extends Error {
 export async function requireUser(request: Request, mutation = false) {
   if (mutation) {
     const origin = request.headers.get("origin");
-    const expected = process.env.BETTER_AUTH_URL;
+    const expected = appOrigin();
     if (!origin || !expected || origin !== new URL(expected).origin) {
       throw new HttpError(403, "Origine refusée. Ouvrez l’application sur son URL officielle.");
     }

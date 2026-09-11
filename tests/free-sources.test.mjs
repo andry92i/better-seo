@@ -35,3 +35,12 @@ test('active workflows and source catalog do not depend on paid SEO providers', 
   assert.match(freeDataInstructions,/Une impression n’est pas un volume/);
   assert.match(freeDataInstructions,/pas d’API|export CSV/);
 });
+
+test('production origin ignores localhost without widening incoming trust',async()=>{
+ const {appOrigin}=await import('../src/lib/app-origin.ts');
+ assert.equal(appOrigin({VERCEL_ENV:'production',BETTER_AUTH_URL:'http://localhost:3000'}),'https://better-seo-five.vercel.app');
+ assert.equal(appOrigin({BETTER_AUTH_URL:'http://127.0.0.1:3217'}),'http://127.0.0.1:3217');
+ assert.equal(appOrigin({}),undefined);
+ assert.equal(getSeoConfig({...configured,SEO_LIVE_ENABLED:'false'}).liveConfigured,false);
+ assert.equal(getSeoConfig({...configured,GROK_API_KEY:''}).checks.apiKey,false);
+});

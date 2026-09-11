@@ -1,3 +1,4 @@
+import { appOrigin } from "./app-origin";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { db } from "@/lib/db";
@@ -7,6 +8,7 @@ import { lastLoginMethod } from "better-auth/plugins";
 const googleConfigured = Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
 
 export const auth = betterAuth({
+  baseURL: appOrigin(),
   database: prismaAdapter(db, { provider: "postgresql" }),
   emailAndPassword: { enabled: true },
   socialProviders: googleConfigured ? {
@@ -24,7 +26,7 @@ export const auth = betterAuth({
       ],
     },
   } : {},
-  trustedOrigins: process.env.BETTER_AUTH_URL ? [process.env.BETTER_AUTH_URL] : [],
+  trustedOrigins: appOrigin() ? [appOrigin()!] : [],
   plugins: [
     lastLoginMethod(),
     nextCookies(),

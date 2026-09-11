@@ -101,3 +101,21 @@ test("public SEO metadata and sitemap exclude private application routes",async(
  const login=await(await fetch(origin+'/login')).text();
  assert.match(login,/noindex/);
 });
+
+
+test('resource URLs select their language, canonical and reciprocal alternates',async()=>{
+ for(const locale of ['en','fr']) {
+  const response=await fetch(origin+`/${locale}/resources/technical-seo-audit`,{headers:{'Accept-Language':locale==='en'?'fr':'en',Cookie:`better-seo-locale=${locale==='en'?'fr':'en'}`}});
+  assert.equal(response.status,200);
+  const html=await response.text();
+  assert.match(html,new RegExp(`lang="${locale}"`));
+  assert.match(html,/hreflang="en"/i);assert.match(html,/hreflang="fr"/i);
+  assert.match(html,new RegExp(`/${locale}/resources/technical-seo-audit`));
+  assert.match(html,/BreadcrumbList/);
+ }
+ assert.equal((await fetch(origin+'/en/resources/missing-resource')).status,404);
+ assert.equal((await fetch(origin+'/es/resources')).status,404);
+ const sitemap=await(await fetch(origin+'/sitemap.xml')).text();
+ assert.match(sitemap,/\/en\/resources\/seo-content-brief/);
+ assert.match(sitemap,/\/fr\/resources\/seo-content-brief/);
+});

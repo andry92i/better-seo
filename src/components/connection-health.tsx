@@ -1,0 +1,13 @@
+"use client";
+import { useQuery } from "@tanstack/react-query";
+import { useLocale } from "next-intl";
+import { api } from "@/lib/project-client";
+import { Card } from "./ui/card";
+import { Button } from "./ui/button";
+type Health={googleLinked:boolean;configured:boolean;scopes:string;assistant:{ready:boolean;checks:Record<string,boolean>}};
+export function ConnectionHealth(){
+ const fr=useLocale()==="fr";
+ const {data,error,isPending,refetch}=useQuery({queryKey:['connection-health'],queryFn:()=>api<Health>('/api/integrations/status')});
+ const labels:Record<string,string>=fr?{enabled:'Activation de l’assistant',model:'Identifiant du modèle',apiKey:'Clé du service IA',database:'Configuration de la base de données',origin:'Adresse de l’application',authSecret:'Secret de session'}:{enabled:'Assistant enabled',model:'Model identifier',apiKey:'AI service key',database:'Database configuration',origin:'Application address',authSecret:'Session secret'};
+ return <Card className="p-6"><div className="flex flex-wrap items-center justify-between gap-3"><h2 className="text-lg font-semibold">{fr?'État des services':'Service readiness'}</h2><Button variant="outline" size="sm" disabled={isPending} onClick={()=>void refetch()}>{fr?'Actualiser':'Refresh'}</Button></div>{isPending?<p role="status">{fr?'Vérification…':'Checking…'}</p>:error?<p role="alert">{fr?'Impossible de vérifier les services.':'Could not check services.'}</p>:data?<><dl className="grid gap-3 text-sm sm:grid-cols-2">{Object.entries(data.assistant.checks).map(([key,ok])=><div key={key} className="flex justify-between gap-3 border-b py-3"><dt>{labels[key]??key}</dt><dd className={ok?'font-medium':'font-medium text-destructive'}>{ok?(fr?'Configuré':'Configured'):(fr?'À configurer':'Needs setup')}</dd></div>)}<div className="border-b py-3"><dt>Google OAuth</dt><dd>{data.configured?(fr?'Configuré':'Configured'):(fr?'À configurer':'Needs setup')}</dd></div><div className="border-b py-3"><dt>{fr?'Compte Google':'Google account'}</dt><dd>{data.googleLinked?(fr?'Connecté':'Linked'):(fr?'Non connecté':'Not linked')}</dd></div></dl>{data.googleLinked&&<p className="text-sm text-muted-foreground">Search Console: {data.scopes.includes('webmasters.readonly')?'✓':'—'} · Analytics: {data.scopes.includes('analytics.readonly')?'✓':'—'}</p>}<p className="text-sm text-muted-foreground">{fr?'Ces contrôles vérifient la configuration. Un audit réussi confirme ensuite l’accès aux données. Les paramètres serveur sont gérés par le propriétaire du déploiement.':'These checks validate configuration. A successful audit then confirms data access. Server settings are managed by the deployment owner.'}</p></>:null}</Card>;
+}
