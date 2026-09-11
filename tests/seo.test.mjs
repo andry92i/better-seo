@@ -55,7 +55,7 @@ test("mutations require a session and reject cross-origin requests before doing 
   }
 });
 test("workspace routes require login and marketing pages remain public",async()=>{
-  for(const path of ["/dashboard","/onboarding","/workspace/keyword-research"]) {
+  for(const path of ["/dashboard","/dashboard/profile","/onboarding","/workspace/keyword-research"]) {
     const r=await fetch(origin+path,{redirect:"manual"});
     assert.equal(r.status,307,path); assert.match(r.headers.get("location"),/login/);
   }
@@ -80,4 +80,10 @@ test("browser language and explicit preference control server-rendered pages",as
     const error=await(await fetch(origin+"/api/projects",{headers:{"Accept-Language":language}})).json();
     assert.equal(error.error,language==="fr"?"Connectez-vous pour accéder à votre projet.":"Sign in to access your project.");
   }
+});
+
+test("profile mutation is protected by session and origin checks",async()=>{
+ const options={method:"PATCH",headers:{"Content-Type":"application/json",Origin:origin},body:JSON.stringify({name:"Other",image:""})};
+ assert.equal((await fetch(origin+"/api/profile",options)).status,401);
+ assert.equal((await fetch(origin+"/api/profile",{...options,headers:{...options.headers,Origin:"https://attacker.example"}})).status,403);
 });

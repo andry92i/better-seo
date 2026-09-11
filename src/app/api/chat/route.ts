@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     const copy = await serverCopy();
     const body = chatRequestSchema.parse(await readBoundedJson(request));
     const config = getSeoConfig();
-    if (!config.liveConfigured) throw new HttpError(503, "Configurez GROK_API_KEY, SEO_MODEL et SEO_LIVE_ENABLED sur le serveur.");
+    if (!config.liveConfigured) throw new HttpError(503, "L’assistant est temporairement indisponible. Réessayez plus tard.");
     const project = await ownedProject(user.id, body.projectId);
     const last = body.messages.at(-1)!;
     const question = last.parts.map(p => p.text).join("\n");
@@ -42,7 +42,7 @@ export async function POST(request: Request) {
         if (parts.length) await db.message.create({ data: { conversationId: conversation.id, role: "assistant", parts: JSON.parse(JSON.stringify(parts)) } });
         await db.conversation.update({ where: { id: conversation.id }, data: { updatedAt: new Date() } });
       },
-      onError: () => copy("Analyse interrompue. Vérifiez la disponibilité et le quota du modèle Grok configuré."),
+      onError: () => copy("La réponse a été interrompue. Réessayez dans un instant."),
     });
   } catch (error) { return apiError(error); }
 }

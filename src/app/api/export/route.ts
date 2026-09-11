@@ -5,7 +5,7 @@ import { readBoundedJson } from "@/lib/http";
 import { requireUser, apiError } from "@/lib/server-access";
 import { exportDocument } from "@/lib/export";
 export const runtime = "nodejs";
-const schema = z.object({ format:z.enum(["md","docx","xlsx"]), topic:z.string().max(100), content:z.string().min(1).max(50000) });
+const schema = z.object({ format:z.enum(["md","txt","docx","xlsx"]), topic:z.string().max(100), content:z.string().min(1).max(50000) });
 export async function POST(request: Request) {
   try { await requireUser(request, true); } catch (e) { return apiError(e); }
   const locale = await getLocale() as Locale;

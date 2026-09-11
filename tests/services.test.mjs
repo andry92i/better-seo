@@ -52,3 +52,16 @@ test("French spreadsheet export localizes sheet names without changing content",
  const result=await exportDocument("Bonjour","xlsx","fr");
  const book=XLSX.read(result.body);assert.equal(book.Sheets["Résultat"].B2.v,"Bonjour");
 });
+
+test("profile edits reject identity changes and unsafe avatar URLs", async()=>{
+ const {profileSchema}=await import("../src/lib/profile-schema.ts");
+ assert.equal(profileSchema.parse({name:" Andry ",image:""}).name,"Andry");
+ for(const value of [{name:" ",image:""},{name:"Andry",image:"javascript:alert(1)"},{name:"Andry",image:"http://example.com/a.png"},{name:"Andry",image:"https://user:secret@example.com/a.png"},{name:"Andry",image:"",emailVerified:true},{name:"Andry",image:"",id:"another-user"}]) assert.equal(profileSchema.safeParse(value).success,false);
+});
+test("spreadsheet exports keep separate tables and escaped pipes intact",async()=>{
+ const content="| Topic | Value |\n| --- | --- |\n| A \\| B | =1+1 |\n\nAnother table\n\n| Task | Owner |\n| --- | --- |\n| Review | Editor |";
+ const file=await exportDocument(content,"xlsx");const book=XLSX.read(file.body);
+ assert.deepEqual(book.SheetNames,["Result","Tables","Tables 2"]);
+ assert.equal(book.Sheets.Tables.A2.v,"A | B");assert.equal(book.Sheets.Tables.B2.t,"s");assert.equal(book.Sheets.Tables.B2.f,undefined);
+ assert.equal((await exportDocument(content,"txt")).body,content);
+});

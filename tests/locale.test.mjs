@@ -17,3 +17,9 @@ test('core text and surface color pairs meet WCAG AA normal-text contrast',()=>{
   const a=luminance(fg),b=luminance(bg);assert.ok((Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5,`${fg}/${bg}`);
  }
 });
+
+test('account navigation and profile translations are complete and provider-neutral',()=>{
+ const catalogs=['en','fr'].map(lang=>JSON.parse(readFileSync(`messages/${lang}.json`)));
+ for(const namespace of ['workspace','profile'])assert.deepEqual(Object.keys(catalogs[0][namespace]).sort(),Object.keys(catalogs[1][namespace]).sort());
+ for(const catalog of catalogs)assert.doesNotMatch(JSON.stringify(catalog),/grok|simulation/i);
+});
