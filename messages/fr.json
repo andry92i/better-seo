@@ -332,7 +332,13 @@
     "partial_export_domains_may_be_47f86a": "Export partiel. Les domaines peuvent désigner des sources ou des cibles selon le rapport importé. Aucun score d’autorité calculé.",
     "insufficient_traffic_f21645": "Trafic insuffisant",
     "assistant_unavailable": "L’assistant est temporairement indisponible. Réessayez plus tard.",
-    "response_interrupted": "La réponse a été interrompue. Réessayez dans un instant."
+    "response_interrupted": "La réponse a été interrompue. Réessayez dans un instant.",
+    "full_audit_title": "Audit SEO complet",
+    "page_analysis_title": "Analyse de page",
+    "schema_analysis_title": "Données structurées",
+    "sitemap_analysis_title": "Sitemap et maillage",
+    "image_analysis_title": "SEO des images",
+    "content_review_title": "Qualité éditoriale"
   },
   "workspace": {
     "account": "Mon compte",

@@ -1,3 +1,4 @@
+import { belongsToProperty } from "./inspection";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { HttpError } from "@/lib/server-access";
@@ -75,4 +76,12 @@ export async function analyticsReport(token: string, property: string) {
     limit: "10000",
   });
   return { range, ...report, channel: "Organic Search", limit: 10000 };
+}
+
+export async function inspectGoogleUrl(token: string, property: string, url: string) {
+  if (!belongsToProperty(url, property)) throw new HttpError(422, "L’URL ne fait pas partie de la propriété Search Console sélectionnée.");
+  const result = await googleJson<{ inspectionResult?: Record<string, unknown> }>(
+    "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect", token,
+    { inspectionUrl: url, siteUrl: property, languageCode: "en-US" });
+  return { url, property, collectedAt: new Date().toISOString(), scope: "Google indexed version, not a live indexability test", result: result.inspectionResult ?? null };
 }

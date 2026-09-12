@@ -1,0 +1,1217 @@
+{
+  "collectedAt": "2026-09-12T08:10:05.698Z",
+  "pages": [
+    {
+      "url": "https://better-seo-five.vercel.app/",
+      "status": 200,
+      "title": "Better SEO — Your AI SEO engineer",
+      "description": "Turn Search Console and Analytics data into a prioritized SEO strategy and measurable actions.",
+      "h1": [
+        "Your data.A clear direction.Meaningful action."
+      ],
+      "canonical": "https://better-seo-five.vercel.app",
+      "robots": " ",
+      "images": 0,
+      "missingAlt": 0,
+      "internalLinks": [
+        "https://better-seo-five.vercel.app/",
+        "https://better-seo-five.vercel.app/en/resources",
+        "https://better-seo-five.vercel.app/login",
+        "https://better-seo-five.vercel.app/signup",
+        "https://better-seo-five.vercel.app/en/resources/seo-methodology"
+      ],
+      "externalLinks": [],
+      "schemaTypes": [
+        "SoftwareApplication"
+      ],
+      "hreflang": [],
+      "language": "en",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Your data.A clear direction.Meaningful action."
+        },
+        {
+          "level": 2,
+          "text": "Observe"
+        },
+        {
+          "level": 2,
+          "text": "Understand"
+        },
+        {
+          "level": 2,
+          "text": "Prioritize"
+        },
+        {
+          "level": 2,
+          "text": "Create"
+        },
+        {
+          "level": 2,
+          "text": "All your SEO work.In the context of your project."
+        },
+        {
+          "level": 3,
+          "text": "Understand what people search for."
+        },
+        {
+          "level": 3,
+          "text": "Turn findings into action."
+        },
+        {
+          "level": 3,
+          "text": "Write with a clear purpose."
+        },
+        {
+          "level": 2,
+          "text": "Your sources.Your control."
+        },
+        {
+          "level": 3,
+          "text": "A transparent scope."
+        },
+        {
+          "level": 2,
+          "text": "What will you do next?"
+        }
+      ],
+      "alternates": [],
+      "social": {
+        "title": "Better SEO — Turn search data into action",
+        "description": "Analyze your website, prioritize SEO work and draft content using your Search Console and Analytics data.",
+        "image": "https://better-seo-five.vercel.app/opengraph-image?d10ca891601e04bb"
+      },
+      "wordCount": 218
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/en/resources",
+      "status": 200,
+      "title": "SEO guides and evidence-led workflows | Better SEO · Better SEO",
+      "description": "Practical guides to Search Console, technical audits and SEO content. Understand the data, methods and coverage behind Better SEO.",
+      "h1": [
+        "From search data to your next SEO action"
+      ],
+      "canonical": "https://better-seo-five.vercel.app/en/resources",
+      "robots": " ",
+      "images": 0,
+      "missingAlt": 0,
+      "internalLinks": [
+        "https://better-seo-five.vercel.app/en/resources",
+        "https://better-seo-five.vercel.app/",
+        "https://better-seo-five.vercel.app/login",
+        "https://better-seo-five.vercel.app/en/resources/technical-seo-audit",
+        "https://better-seo-five.vercel.app/en/resources/search-console-opportunities",
+        "https://better-seo-five.vercel.app/en/resources/seo-content-brief",
+        "https://better-seo-five.vercel.app/en/resources/search-console-vs-analytics",
+        "https://better-seo-five.vercel.app/en/resources/seo-methodology"
+      ],
+      "externalLinks": [],
+      "schemaTypes": [],
+      "hreflang": [
+        "en",
+        "fr"
+      ],
+      "language": "en",
+      "headings": [
+        {
+          "level": 1,
+          "text": "From search data to your next SEO action"
+        },
+        {
+          "level": 2,
+          "text": "A technical SEO audit you can act on"
+        },
+        {
+          "level": 2,
+          "text": "Find opportunities in the searches that already reach you"
+        },
+        {
+          "level": 2,
+          "text": "Write the brief before writing the page"
+        },
+        {
+          "level": 2,
+          "text": "Search visibility and on-site behavior answer different questions"
+        },
+        {
+          "level": 2,
+          "text": "Know what a recommendation is based on"
+        }
+      ],
+      "alternates": [
+        {
+          "language": "en",
+          "href": "https://better-seo-five.vercel.app/en/resources"
+        },
+        {
+          "language": "fr",
+          "href": "https://better-seo-five.vercel.app/fr/resources"
+        }
+      ],
+      "social": {
+        "title": "SEO guides and evidence-led workflows | Better SEO · Better SEO",
+        "description": "Practical guides to Search Console, technical audits and SEO content. Understand the data, methods and coverage behind Better SEO.",
+        "image": "https://better-seo-five.vercel.app/opengraph-image?d10ca891601e04bb"
+      },
+      "wordCount": 164
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/fr/resources/seo-content-brief",
+      "status": 200,
+      "title": "Créer un brief de contenu SEO à partir de preuves utiles",
+      "description": "Préparez un brief avec audience, intention, sources, plan et liens internes avant de rédiger un article ou une landing page dans Better SEO.",
+      "h1": [
+        "Préparer le brief avant de rédiger la page"
+      ],
+      "canonical": "https://better-seo-five.vercel.app/fr/resources/seo-content-brief",
+      "robots": " ",
+      "images": 0,
+      "missingAlt": 0,
+      "internalLinks": [
+        "https://better-seo-five.vercel.app/fr/resources/seo-content-brief",
+        "https://better-seo-five.vercel.app/",
+        "https://better-seo-five.vercel.app/fr/resources",
+        "https://better-seo-five.vercel.app/login",
+        "https://better-seo-five.vercel.app/workspace/content-plan",
+        "https://better-seo-five.vercel.app/fr/resources/technical-seo-audit",
+        "https://better-seo-five.vercel.app/fr/resources/search-console-opportunities",
+        "https://better-seo-five.vercel.app/fr/resources/seo-methodology"
+      ],
+      "externalLinks": [
+        "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+      ],
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "hreflang": [
+        "en",
+        "fr"
+      ],
+      "language": "fr",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Préparer le brief avant de rédiger la page"
+        },
+        {
+          "level": 2,
+          "text": "Choisir le rôle de la page"
+        },
+        {
+          "level": 2,
+          "text": "Construire un plan qui répond aux bonnes questions"
+        },
+        {
+          "level": 2,
+          "text": "Rédiger, vérifier puis exporter"
+        },
+        {
+          "level": 2,
+          "text": "Sources et références"
+        },
+        {
+          "level": 2,
+          "text": "Dans ce guide"
+        },
+        {
+          "level": 2,
+          "text": "Pour approfondir"
+        }
+      ],
+      "alternates": [
+        {
+          "language": "en",
+          "href": "https://better-seo-five.vercel.app/en/resources/seo-content-brief"
+        },
+        {
+          "language": "fr",
+          "href": "https://better-seo-five.vercel.app/fr/resources/seo-content-brief"
+        }
+      ],
+      "social": {
+        "title": "Créer un brief de contenu SEO à partir de preuves utiles",
+        "description": "Préparez un brief avec audience, intention, sources, plan et liens internes avant de rédiger un article ou une landing page dans Better SEO.",
+        "image": "https://better-seo-five.vercel.app/opengraph-image"
+      },
+      "wordCount": 362
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/fr/resources/search-console-vs-analytics",
+      "status": 200,
+      "title": "Search Console et Google Analytics : bien lire le SEO",
+      "description": "Comprenez pourquoi clics Search Console et sessions Analytics diffèrent, puis utilisez les deux sources pour analyser le SEO sans conclusions hâtives.",
+      "h1": [
+        "La visibilité et le comportement répondent à des questions différentes"
+      ],
+      "canonical": "https://better-seo-five.vercel.app/fr/resources/search-console-vs-analytics",
+      "robots": " ",
+      "images": 0,
+      "missingAlt": 0,
+      "internalLinks": [
+        "https://better-seo-five.vercel.app/fr/resources/search-console-vs-analytics",
+        "https://better-seo-five.vercel.app/",
+        "https://better-seo-five.vercel.app/fr/resources",
+        "https://better-seo-five.vercel.app/login",
+        "https://better-seo-five.vercel.app/workspace/quick-wins",
+        "https://better-seo-five.vercel.app/fr/resources/technical-seo-audit",
+        "https://better-seo-five.vercel.app/fr/resources/search-console-opportunities",
+        "https://better-seo-five.vercel.app/fr/resources/seo-methodology"
+      ],
+      "externalLinks": [
+        "https://support.google.com/webmasters/answer/7576553",
+        "https://support.google.com/analytics/answer/9191807"
+      ],
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "hreflang": [
+        "en",
+        "fr"
+      ],
+      "language": "fr",
+      "headings": [
+        {
+          "level": 1,
+          "text": "La visibilité et le comportement répondent à des questions différentes"
+        },
+        {
+          "level": 2,
+          "text": "Ce que montre Search Console"
+        },
+        {
+          "level": 2,
+          "text": "Ce qu’apporte Analytics"
+        },
+        {
+          "level": 2,
+          "text": "Utiliser les écarts pour mieux enquêter"
+        },
+        {
+          "level": 2,
+          "text": "Sources et références"
+        },
+        {
+          "level": 2,
+          "text": "Dans ce guide"
+        },
+        {
+          "level": 2,
+          "text": "Pour approfondir"
+        }
+      ],
+      "alternates": [
+        {
+          "language": "en",
+          "href": "https://better-seo-five.vercel.app/en/resources/search-console-vs-analytics"
+        },
+        {
+          "language": "fr",
+          "href": "https://better-seo-five.vercel.app/fr/resources/search-console-vs-analytics"
+        }
+      ],
+      "social": {
+        "title": "Search Console et Google Analytics : bien lire le SEO",
+        "description": "Comprenez pourquoi clics Search Console et sessions Analytics diffèrent, puis utilisez les deux sources pour analyser le SEO sans conclusions hâtives.",
+        "image": "https://better-seo-five.vercel.app/opengraph-image"
+      },
+      "wordCount": 342
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/fr/resources/seo-methodology",
+      "status": 200,
+      "title": "Comment Better SEO construit ses recommandations SEO",
+      "description": "Découvrez les sources de Better SEO, le rôle de Claude SEO et les limites de couverture pour les données privées, les backlinks et les recommandations IA.",
+      "h1": [
+        "Comprendre les preuves derrière une recommandation"
+      ],
+      "canonical": "https://better-seo-five.vercel.app/fr/resources/seo-methodology",
+      "robots": " ",
+      "images": 0,
+      "missingAlt": 0,
+      "internalLinks": [
+        "https://better-seo-five.vercel.app/fr/resources/seo-methodology",
+        "https://better-seo-five.vercel.app/",
+        "https://better-seo-five.vercel.app/fr/resources",
+        "https://better-seo-five.vercel.app/login",
+        "https://better-seo-five.vercel.app/workspace/content-plan",
+        "https://better-seo-five.vercel.app/fr/resources/technical-seo-audit",
+        "https://better-seo-five.vercel.app/fr/resources/search-console-opportunities"
+      ],
+      "externalLinks": [
+        "https://github.com/AgriciDaniel/claude-seo",
+        "https://developers.google.com/search/docs/essentials"
+      ],
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "hreflang": [
+        "en",
+        "fr"
+      ],
+      "language": "fr",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Comprendre les preuves derrière une recommandation"
+        },
+        {
+          "level": 2,
+          "text": "Trois niveaux avec des rôles distincts"
+        },
+        {
+          "level": 2,
+          "text": "Ce qui n’est pas accessible automatiquement"
+        },
+        {
+          "level": 2,
+          "text": "Vérifier le résultat avant d’agir"
+        },
+        {
+          "level": 2,
+          "text": "Sources et références"
+        },
+        {
+          "level": 2,
+          "text": "Dans ce guide"
+        },
+        {
+          "level": 2,
+          "text": "Pour approfondir"
+        }
+      ],
+      "alternates": [
+        {
+          "language": "en",
+          "href": "https://better-seo-five.vercel.app/en/resources/seo-methodology"
+        },
+        {
+          "language": "fr",
+          "href": "https://better-seo-five.vercel.app/fr/resources/seo-methodology"
+        }
+      ],
+      "social": {
+        "title": "Comment Better SEO construit ses recommandations SEO",
+        "description": "Découvrez les sources de Better SEO, le rôle de Claude SEO et les limites de couverture pour les données privées, les backlinks et les recommandations IA.",
+        "image": "https://better-seo-five.vercel.app/opengraph-image"
+      },
+      "wordCount": 367
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/en/resources/technical-seo-audit",
+      "status": 200,
+      "title": "Technical SEO audit: find and prioritize website problems",
+      "description": "Learn how Better SEO checks server HTML, page metadata and performance evidence, then turns observed issues into a practical technical SEO work plan.",
+      "h1": [
+        "A technical SEO audit you can act on"
+      ],
+      "canonical": "https://better-seo-five.vercel.app/en/resources/technical-seo-audit",
+      "robots": " ",
+      "images": 0,
+      "missingAlt": 0,
+      "internalLinks": [
+        "https://better-seo-five.vercel.app/en/resources/technical-seo-audit",
+        "https://better-seo-five.vercel.app/",
+        "https://better-seo-five.vercel.app/en/resources",
+        "https://better-seo-five.vercel.app/login",
+        "https://better-seo-five.vercel.app/workspace/technical-sprint",
+        "https://better-seo-five.vercel.app/en/resources/search-console-opportunities",
+        "https://better-seo-five.vercel.app/en/resources/seo-content-brief",
+        "https://better-seo-five.vercel.app/en/resources/seo-methodology"
+      ],
+      "externalLinks": [
+        "https://developers.google.com/search/docs/essentials/technical",
+        "https://web.dev/articles/vitals"
+      ],
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "hreflang": [
+        "en",
+        "fr"
+      ],
+      "language": "en",
+      "headings": [
+        {
+          "level": 1,
+          "text": "A technical SEO audit you can act on"
+        },
+        {
+          "level": 2,
+          "text": "Start with the pages search engines can receive"
+        },
+        {
+          "level": 2,
+          "text": "Separate measurements from recommendations"
+        },
+        {
+          "level": 2,
+          "text": "Turn findings into a development plan"
+        },
+        {
+          "level": 2,
+          "text": "Sources and references"
+        },
+        {
+          "level": 2,
+          "text": "In this guide"
+        },
+        {
+          "level": 2,
+          "text": "Continue reading"
+        }
+      ],
+      "alternates": [
+        {
+          "language": "en",
+          "href": "https://better-seo-five.vercel.app/en/resources/technical-seo-audit"
+        },
+        {
+          "language": "fr",
+          "href": "https://better-seo-five.vercel.app/fr/resources/technical-seo-audit"
+        }
+      ],
+      "social": {
+        "title": "Technical SEO audit: find and prioritize website problems",
+        "description": "Learn how Better SEO checks server HTML, page metadata and performance evidence, then turns observed issues into a practical technical SEO work plan.",
+        "image": "https://better-seo-five.vercel.app/opengraph-image"
+      },
+      "wordCount": 348
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/en/resources/search-console-opportunities",
+      "status": 200,
+      "title": "Find SEO opportunities in your Google Search Console data",
+      "description": "Use your own Search Console queries, clicks, impressions and pages to prioritize SEO work without confusing observed impressions with keyword search volume.",
+      "h1": [
+        "Find opportunities in the searches that already reach you"
+      ],
+      "canonical": "https://better-seo-five.vercel.app/en/resources/search-console-opportunities",
+      "robots": " ",
+      "images": 0,
+      "missingAlt": 0,
+      "internalLinks": [
+        "https://better-seo-five.vercel.app/en/resources/search-console-opportunities",
+        "https://better-seo-five.vercel.app/",
+        "https://better-seo-five.vercel.app/en/resources",
+        "https://better-seo-five.vercel.app/login",
+        "https://better-seo-five.vercel.app/workspace/keyword-research",
+        "https://better-seo-five.vercel.app/en/resources/technical-seo-audit",
+        "https://better-seo-five.vercel.app/en/resources/seo-content-brief",
+        "https://better-seo-five.vercel.app/en/resources/seo-methodology"
+      ],
+      "externalLinks": [
+        "https://support.google.com/webmasters/answer/7576553",
+        "https://developers.google.com/webmaster-tools/v1/searchanalytics/query"
+      ],
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "hreflang": [
+        "en",
+        "fr"
+      ],
+      "language": "en",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Find opportunities in the searches that already reach you"
+        },
+        {
+          "level": 2,
+          "text": "Connect the property you actually want to analyze"
+        },
+        {
+          "level": 2,
+          "text": "Read the metrics together"
+        },
+        {
+          "level": 2,
+          "text": "Build a testable next action"
+        },
+        {
+          "level": 2,
+          "text": "Sources and references"
+        },
+        {
+          "level": 2,
+          "text": "In this guide"
+        },
+        {
+          "level": 2,
+          "text": "Continue reading"
+        }
+      ],
+      "alternates": [
+        {
+          "language": "en",
+          "href": "https://better-seo-five.vercel.app/en/resources/search-console-opportunities"
+        },
+        {
+          "language": "fr",
+          "href": "https://better-seo-five.vercel.app/fr/resources/search-console-opportunities"
+        }
+      ],
+      "social": {
+        "title": "Find SEO opportunities in your Google Search Console data",
+        "description": "Use your own Search Console queries, clicks, impressions and pages to prioritize SEO work without confusing observed impressions with keyword search volume.",
+        "image": "https://better-seo-five.vercel.app/opengraph-image"
+      },
+      "wordCount": 351
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/en/resources/seo-content-brief",
+      "status": 200,
+      "title": "Build an SEO content brief from search and page evidence",
+      "description": "Create a useful content brief with audience, intent, evidence, outline and internal links before drafting an article or landing page in Better SEO.",
+      "h1": [
+        "Write the brief before writing the page"
+      ],
+      "canonical": "https://better-seo-five.vercel.app/en/resources/seo-content-brief",
+      "robots": " ",
+      "images": 0,
+      "missingAlt": 0,
+      "internalLinks": [
+        "https://better-seo-five.vercel.app/en/resources/seo-content-brief",
+        "https://better-seo-five.vercel.app/",
+        "https://better-seo-five.vercel.app/en/resources",
+        "https://better-seo-five.vercel.app/login",
+        "https://better-seo-five.vercel.app/workspace/content-plan",
+        "https://better-seo-five.vercel.app/en/resources/technical-seo-audit",
+        "https://better-seo-five.vercel.app/en/resources/search-console-opportunities",
+        "https://better-seo-five.vercel.app/en/resources/seo-methodology"
+      ],
+      "externalLinks": [
+        "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+      ],
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "hreflang": [
+        "en",
+        "fr"
+      ],
+      "language": "en",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Write the brief before writing the page"
+        },
+        {
+          "level": 2,
+          "text": "Choose the job this page must do"
+        },
+        {
+          "level": 2,
+          "text": "Make the outline answer real questions"
+        },
+        {
+          "level": 2,
+          "text": "Draft, review and export"
+        },
+        {
+          "level": 2,
+          "text": "Sources and references"
+        },
+        {
+          "level": 2,
+          "text": "In this guide"
+        },
+        {
+          "level": 2,
+          "text": "Continue reading"
+        }
+      ],
+      "alternates": [
+        {
+          "language": "en",
+          "href": "https://better-seo-five.vercel.app/en/resources/seo-content-brief"
+        },
+        {
+          "language": "fr",
+          "href": "https://better-seo-five.vercel.app/fr/resources/seo-content-brief"
+        }
+      ],
+      "social": {
+        "title": "Build an SEO content brief from search and page evidence",
+        "description": "Create a useful content brief with audience, intent, evidence, outline and internal links before drafting an article or landing page in Better SEO.",
+        "image": "https://better-seo-five.vercel.app/opengraph-image"
+      },
+      "wordCount": 365
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/en/resources/search-console-vs-analytics",
+      "status": 200,
+      "title": "Search Console vs Google Analytics: read SEO data clearly",
+      "description": "Understand why Search Console clicks and Google Analytics sessions differ, and use both sources to investigate SEO performance without false conclusions.",
+      "h1": [
+        "Search visibility and on-site behavior answer different questions"
+      ],
+      "canonical": "https://better-seo-five.vercel.app/en/resources/search-console-vs-analytics",
+      "robots": " ",
+      "images": 0,
+      "missingAlt": 0,
+      "internalLinks": [
+        "https://better-seo-five.vercel.app/en/resources/search-console-vs-analytics",
+        "https://better-seo-five.vercel.app/",
+        "https://better-seo-five.vercel.app/en/resources",
+        "https://better-seo-five.vercel.app/login",
+        "https://better-seo-five.vercel.app/workspace/quick-wins",
+        "https://better-seo-five.vercel.app/en/resources/technical-seo-audit",
+        "https://better-seo-five.vercel.app/en/resources/search-console-opportunities",
+        "https://better-seo-five.vercel.app/en/resources/seo-methodology"
+      ],
+      "externalLinks": [
+        "https://support.google.com/webmasters/answer/7576553",
+        "https://support.google.com/analytics/answer/9191807"
+      ],
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "hreflang": [
+        "en",
+        "fr"
+      ],
+      "language": "en",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Search visibility and on-site behavior answer different questions"
+        },
+        {
+          "level": 2,
+          "text": "What Search Console tells you"
+        },
+        {
+          "level": 2,
+          "text": "What Analytics adds"
+        },
+        {
+          "level": 2,
+          "text": "Use the difference to ask a better question"
+        },
+        {
+          "level": 2,
+          "text": "Sources and references"
+        },
+        {
+          "level": 2,
+          "text": "In this guide"
+        },
+        {
+          "level": 2,
+          "text": "Continue reading"
+        }
+      ],
+      "alternates": [
+        {
+          "language": "en",
+          "href": "https://better-seo-five.vercel.app/en/resources/search-console-vs-analytics"
+        },
+        {
+          "language": "fr",
+          "href": "https://better-seo-five.vercel.app/fr/resources/search-console-vs-analytics"
+        }
+      ],
+      "social": {
+        "title": "Search Console vs Google Analytics: read SEO data clearly",
+        "description": "Understand why Search Console clicks and Google Analytics sessions differ, and use both sources to investigate SEO performance without false conclusions.",
+        "image": "https://better-seo-five.vercel.app/opengraph-image"
+      },
+      "wordCount": 335
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/en/resources/seo-methodology",
+      "status": 200,
+      "title": "How Better SEO builds recommendations from your evidence",
+      "description": "See which sources Better SEO uses, how Claude SEO guides analysis and where coverage ends, including private data, backlinks and AI recommendations.",
+      "h1": [
+        "Know what a recommendation is based on"
+      ],
+      "canonical": "https://better-seo-five.vercel.app/en/resources/seo-methodology",
+      "robots": " ",
+      "images": 0,
+      "missingAlt": 0,
+      "internalLinks": [
+        "https://better-seo-five.vercel.app/en/resources/seo-methodology",
+        "https://better-seo-five.vercel.app/",
+        "https://better-seo-five.vercel.app/en/resources",
+        "https://better-seo-five.vercel.app/login",
+        "https://better-seo-five.vercel.app/workspace/content-plan",
+        "https://better-seo-five.vercel.app/en/resources/technical-seo-audit",
+        "https://better-seo-five.vercel.app/en/resources/search-console-opportunities"
+      ],
+      "externalLinks": [
+        "https://github.com/AgriciDaniel/claude-seo",
+        "https://developers.google.com/search/docs/essentials"
+      ],
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "hreflang": [
+        "en",
+        "fr"
+      ],
+      "language": "en",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Know what a recommendation is based on"
+        },
+        {
+          "level": 2,
+          "text": "Three layers, three different roles"
+        },
+        {
+          "level": 2,
+          "text": "What is not available automatically"
+        },
+        {
+          "level": 2,
+          "text": "Review the result before acting"
+        },
+        {
+          "level": 2,
+          "text": "Sources and references"
+        },
+        {
+          "level": 2,
+          "text": "In this guide"
+        },
+        {
+          "level": 2,
+          "text": "Continue reading"
+        }
+      ],
+      "alternates": [
+        {
+          "language": "en",
+          "href": "https://better-seo-five.vercel.app/en/resources/seo-methodology"
+        },
+        {
+          "language": "fr",
+          "href": "https://better-seo-five.vercel.app/fr/resources/seo-methodology"
+        }
+      ],
+      "social": {
+        "title": "How Better SEO builds recommendations from your evidence",
+        "description": "See which sources Better SEO uses, how Claude SEO guides analysis and where coverage ends, including private data, backlinks and AI recommendations.",
+        "image": "https://better-seo-five.vercel.app/opengraph-image"
+      },
+      "wordCount": 347
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/fr/resources",
+      "status": 200,
+      "title": "Guides SEO et méthode d’analyse | Better SEO · Better SEO",
+      "description": "Guides pratiques sur Search Console, les audits techniques et les contenus SEO. Comprenez les données, les méthodes et les limites de Better SEO.",
+      "h1": [
+        "Des données à la prochaine action SEO"
+      ],
+      "canonical": "https://better-seo-five.vercel.app/fr/resources",
+      "robots": " ",
+      "images": 0,
+      "missingAlt": 0,
+      "internalLinks": [
+        "https://better-seo-five.vercel.app/fr/resources",
+        "https://better-seo-five.vercel.app/",
+        "https://better-seo-five.vercel.app/login",
+        "https://better-seo-five.vercel.app/fr/resources/technical-seo-audit",
+        "https://better-seo-five.vercel.app/fr/resources/search-console-opportunities",
+        "https://better-seo-five.vercel.app/fr/resources/seo-content-brief",
+        "https://better-seo-five.vercel.app/fr/resources/search-console-vs-analytics",
+        "https://better-seo-five.vercel.app/fr/resources/seo-methodology"
+      ],
+      "externalLinks": [],
+      "schemaTypes": [],
+      "hreflang": [
+        "en",
+        "fr"
+      ],
+      "language": "fr",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Des données à la prochaine action SEO"
+        },
+        {
+          "level": 2,
+          "text": "Un audit SEO technique qui mène à des actions"
+        },
+        {
+          "level": 2,
+          "text": "Trouver des opportunités dans les recherches qui vous atteignent"
+        },
+        {
+          "level": 2,
+          "text": "Préparer le brief avant de rédiger la page"
+        },
+        {
+          "level": 2,
+          "text": "La visibilité et le comportement répondent à des questions différentes"
+        },
+        {
+          "level": 2,
+          "text": "Comprendre les preuves derrière une recommandation"
+        }
+      ],
+      "alternates": [
+        {
+          "language": "en",
+          "href": "https://better-seo-five.vercel.app/en/resources"
+        },
+        {
+          "language": "fr",
+          "href": "https://better-seo-five.vercel.app/fr/resources"
+        }
+      ],
+      "social": {
+        "title": "Guides SEO et méthode d’analyse | Better SEO · Better SEO",
+        "description": "Guides pratiques sur Search Console, les audits techniques et les contenus SEO. Comprenez les données, les méthodes et les limites de Better SEO.",
+        "image": "https://better-seo-five.vercel.app/opengraph-image?d10ca891601e04bb"
+      },
+      "wordCount": 166
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/fr/resources/technical-seo-audit",
+      "status": 200,
+      "title": "Audit SEO technique : identifier et prioriser les problèmes",
+      "description": "Découvrez les contrôles HTML, métadonnées et performances de Better SEO pour transformer les problèmes observés en tâches techniques concrètes.",
+      "h1": [
+        "Un audit SEO technique qui mène à des actions"
+      ],
+      "canonical": "https://better-seo-five.vercel.app/fr/resources/technical-seo-audit",
+      "robots": " ",
+      "images": 0,
+      "missingAlt": 0,
+      "internalLinks": [
+        "https://better-seo-five.vercel.app/fr/resources/technical-seo-audit",
+        "https://better-seo-five.vercel.app/",
+        "https://better-seo-five.vercel.app/fr/resources",
+        "https://better-seo-five.vercel.app/login",
+        "https://better-seo-five.vercel.app/workspace/technical-sprint",
+        "https://better-seo-five.vercel.app/fr/resources/search-console-opportunities",
+        "https://better-seo-five.vercel.app/fr/resources/seo-content-brief",
+        "https://better-seo-five.vercel.app/fr/resources/seo-methodology"
+      ],
+      "externalLinks": [
+        "https://developers.google.com/search/docs/essentials/technical",
+        "https://web.dev/articles/vitals"
+      ],
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "hreflang": [
+        "en",
+        "fr"
+      ],
+      "language": "fr",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Un audit SEO technique qui mène à des actions"
+        },
+        {
+          "level": 2,
+          "text": "Commencer par le HTML accessible aux moteurs"
+        },
+        {
+          "level": 2,
+          "text": "Séparer mesures et recommandations"
+        },
+        {
+          "level": 2,
+          "text": "Transformer les constats en plan de développement"
+        },
+        {
+          "level": 2,
+          "text": "Sources et références"
+        },
+        {
+          "level": 2,
+          "text": "Dans ce guide"
+        },
+        {
+          "level": 2,
+          "text": "Pour approfondir"
+        }
+      ],
+      "alternates": [
+        {
+          "language": "en",
+          "href": "https://better-seo-five.vercel.app/en/resources/technical-seo-audit"
+        },
+        {
+          "language": "fr",
+          "href": "https://better-seo-five.vercel.app/fr/resources/technical-seo-audit"
+        }
+      ],
+      "social": {
+        "title": "Audit SEO technique : identifier et prioriser les problèmes",
+        "description": "Découvrez les contrôles HTML, métadonnées et performances de Better SEO pour transformer les problèmes observés en tâches techniques concrètes.",
+        "image": "https://better-seo-five.vercel.app/opengraph-image"
+      },
+      "wordCount": 341
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/fr/resources/search-console-opportunities",
+      "status": 200,
+      "title": "Identifier les opportunités SEO avec Google Search Console",
+      "description": "Exploitez vos requêtes, clics, impressions et pages Search Console pour prioriser les améliorations SEO sans inventer de volumes de recherche.",
+      "h1": [
+        "Trouver des opportunités dans les recherches qui vous atteignent"
+      ],
+      "canonical": "https://better-seo-five.vercel.app/fr/resources/search-console-opportunities",
+      "robots": " ",
+      "images": 0,
+      "missingAlt": 0,
+      "internalLinks": [
+        "https://better-seo-five.vercel.app/fr/resources/search-console-opportunities",
+        "https://better-seo-five.vercel.app/",
+        "https://better-seo-five.vercel.app/fr/resources",
+        "https://better-seo-five.vercel.app/login",
+        "https://better-seo-five.vercel.app/workspace/keyword-research",
+        "https://better-seo-five.vercel.app/fr/resources/technical-seo-audit",
+        "https://better-seo-five.vercel.app/fr/resources/seo-content-brief",
+        "https://better-seo-five.vercel.app/fr/resources/seo-methodology"
+      ],
+      "externalLinks": [
+        "https://support.google.com/webmasters/answer/7576553",
+        "https://developers.google.com/webmaster-tools/v1/searchanalytics/query"
+      ],
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "hreflang": [
+        "en",
+        "fr"
+      ],
+      "language": "fr",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Trouver des opportunités dans les recherches qui vous atteignent"
+        },
+        {
+          "level": 2,
+          "text": "Connecter la bonne propriété"
+        },
+        {
+          "level": 2,
+          "text": "Interpréter les mesures ensemble"
+        },
+        {
+          "level": 2,
+          "text": "Définir une action vérifiable"
+        },
+        {
+          "level": 2,
+          "text": "Sources et références"
+        },
+        {
+          "level": 2,
+          "text": "Dans ce guide"
+        },
+        {
+          "level": 2,
+          "text": "Pour approfondir"
+        }
+      ],
+      "alternates": [
+        {
+          "language": "en",
+          "href": "https://better-seo-five.vercel.app/en/resources/search-console-opportunities"
+        },
+        {
+          "language": "fr",
+          "href": "https://better-seo-five.vercel.app/fr/resources/search-console-opportunities"
+        }
+      ],
+      "social": {
+        "title": "Identifier les opportunités SEO avec Google Search Console",
+        "description": "Exploitez vos requêtes, clics, impressions et pages Search Console pour prioriser les améliorations SEO sans inventer de volumes de recherche.",
+        "image": "https://better-seo-five.vercel.app/opengraph-image"
+      },
+      "wordCount": 348
+    }
+  ],
+  "findings": [],
+  "international": {
+    "status": "available",
+    "method": "deterministic-observations",
+    "coverage": {
+      "pagesExamined": 13,
+      "crawlLimit": 13,
+      "rendering": "public server HTML"
+    },
+    "total": 0,
+    "rows": [],
+    "nextOffset": null
+  },
+  "technical": {
+    "status": "available",
+    "method": "deterministic-observations",
+    "coverage": {
+      "pagesExamined": 13,
+      "crawlLimit": 13,
+      "rendering": "public server HTML"
+    },
+    "total": 13,
+    "rows": [
+      {
+        "url": "https://better-seo-five.vercel.app/",
+        "check": "indexability-signals",
+        "observed": {
+          "status": 200,
+          "canonical": "https://better-seo-five.vercel.app",
+          "robots": " ",
+          "htmlIndexable": true
+        },
+        "interpretation": "HTML signals only; actual Google index state requires URL Inspection."
+      },
+      {
+        "url": "https://better-seo-five.vercel.app/en/resources",
+        "check": "indexability-signals",
+        "observed": {
+          "status": 200,
+          "canonical": "https://better-seo-five.vercel.app/en/resources",
+          "robots": " ",
+          "htmlIndexable": true
+        },
+        "interpretation": "HTML signals only; actual Google index state requires URL Inspection."
+      },
+      {
+        "url": "https://better-seo-five.vercel.app/fr/resources/seo-content-brief",
+        "check": "indexability-signals",
+        "observed": {
+          "status": 200,
+          "canonical": "https://better-seo-five.vercel.app/fr/resources/seo-content-brief",
+          "robots": " ",
+          "htmlIndexable": true
+        },
+        "interpretation": "HTML signals only; actual Google index state requires URL Inspection."
+      },
+      {
+        "url": "https://better-seo-five.vercel.app/fr/resources/search-console-vs-analytics",
+        "check": "indexability-signals",
+        "observed": {
+          "status": 200,
+          "canonical": "https://better-seo-five.vercel.app/fr/resources/search-console-vs-analytics",
+          "robots": " ",
+          "htmlIndexable": true
+        },
+        "interpretation": "HTML signals only; actual Google index state requires URL Inspection."
+      },
+      {
+        "url": "https://better-seo-five.vercel.app/fr/resources/seo-methodology",
+        "check": "indexability-signals",
+        "observed": {
+          "status": 200,
+          "canonical": "https://better-seo-five.vercel.app/fr/resources/seo-methodology",
+          "robots": " ",
+          "htmlIndexable": true
+        },
+        "interpretation": "HTML signals only; actual Google index state requires URL Inspection."
+      },
+      {
+        "url": "https://better-seo-five.vercel.app/en/resources/technical-seo-audit",
+        "check": "indexability-signals",
+        "observed": {
+          "status": 200,
+          "canonical": "https://better-seo-five.vercel.app/en/resources/technical-seo-audit",
+          "robots": " ",
+          "htmlIndexable": true
+        },
+        "interpretation": "HTML signals only; actual Google index state requires URL Inspection."
+      },
+      {
+        "url": "https://better-seo-five.vercel.app/en/resources/search-console-opportunities",
+        "check": "indexability-signals",
+        "observed": {
+          "status": 200,
+          "canonical": "https://better-seo-five.vercel.app/en/resources/search-console-opportunities",
+          "robots": " ",
+          "htmlIndexable": true
+        },
+        "interpretation": "HTML signals only; actual Google index state requires URL Inspection."
+      },
+      {
+        "url": "https://better-seo-five.vercel.app/en/resources/seo-content-brief",
+        "check": "indexability-signals",
+        "observed": {
+          "status": 200,
+          "canonical": "https://better-seo-five.vercel.app/en/resources/seo-content-brief",
+          "robots": " ",
+          "htmlIndexable": true
+        },
+        "interpretation": "HTML signals only; actual Google index state requires URL Inspection."
+      },
+      {
+        "url": "https://better-seo-five.vercel.app/en/resources/search-console-vs-analytics",
+        "check": "indexability-signals",
+        "observed": {
+          "status": 200,
+          "canonical": "https://better-seo-five.vercel.app/en/resources/search-console-vs-analytics",
+          "robots": " ",
+          "htmlIndexable": true
+        },
+        "interpretation": "HTML signals only; actual Google index state requires URL Inspection."
+      },
+      {
+        "url": "https://better-seo-five.vercel.app/en/resources/seo-methodology",
+        "check": "indexability-signals",
+        "observed": {
+          "status": 200,
+          "canonical": "https://better-seo-five.vercel.app/en/resources/seo-methodology",
+          "robots": " ",
+          "htmlIndexable": true
+        },
+        "interpretation": "HTML signals only; actual Google index state requires URL Inspection."
+      },
+      {
+        "url": "https://better-seo-five.vercel.app/fr/resources",
+        "check": "indexability-signals",
+        "observed": {
+          "status": 200,
+          "canonical": "https://better-seo-five.vercel.app/fr/resources",
+          "robots": " ",
+          "htmlIndexable": true
+        },
+        "interpretation": "HTML signals only; actual Google index state requires URL Inspection."
+      },
+      {
+        "url": "https://better-seo-five.vercel.app/fr/resources/technical-seo-audit",
+        "check": "indexability-signals",
+        "observed": {
+          "status": 200,
+          "canonical": "https://better-seo-five.vercel.app/fr/resources/technical-seo-audit",
+          "robots": " ",
+          "htmlIndexable": true
+        },
+        "interpretation": "HTML signals only; actual Google index state requires URL Inspection."
+      },
+      {
+        "url": "https://better-seo-five.vercel.app/fr/resources/search-console-opportunities",
+        "check": "indexability-signals",
+        "observed": {
+          "status": 200,
+          "canonical": "https://better-seo-five.vercel.app/fr/resources/search-console-opportunities",
+          "robots": " ",
+          "htmlIndexable": true
+        },
+        "interpretation": "HTML signals only; actual Google index state requires URL Inspection."
+      }
+    ],
+    "nextOffset": null
+  }
+}

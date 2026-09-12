@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { db } from "@/lib/db";
-import { googleToken, searchAnalytics, analyticsReport } from "@/lib/google/data";
+import { googleToken, searchAnalytics, analyticsReport, inspectGoogleUrl } from "@/lib/google/data";
 import { ownedProject, HttpError } from "@/lib/server-access";
 import { crawlSite, technicalFindings } from "./crawl";
 import { performanceReport } from "./performance";
@@ -19,12 +19,13 @@ export async function runAudit(userId: string, projectId: string, headers: Heade
     const token = googleToken(userId, headers);
     // Ensure a rejected OAuth promise is handled even when no property was selected.
     const tokenResult = token.catch(() => null);
-    const [crawl, gsc, ga4, performance, competitors] = await Promise.all([
+    const [crawl, gsc, ga4, performance, competitors, inspection] = await Promise.all([
       capture(() => crawlSite(project.websiteUrl)),
       project.gscProperty ? capture(async () => { const t = await tokenResult; if (!t) throw new HttpError(409, "Reconnectez Google."); return searchAnalytics(t, project.gscProperty!); }) : Promise.resolve({ status: "unconfigured" as const }),
       project.ga4Property ? capture(async () => { const t = await tokenResult; if (!t) throw new HttpError(409, "Reconnectez Google."); return analyticsReport(t, project.ga4Property!); }) : Promise.resolve({ status: "unconfigured" as const }),
       performanceReport(project.websiteUrl),
       Promise.all(project.competitors.filter(c => c.selected).slice(0, 3).map(async c => ({ domain: c.domain, result: await capture(() => crawlSite(c.domain, 1)) }))),
+      project.gscProperty ? capture(async () => { const t = await tokenResult; if (!t) throw new HttpError(409, "Reconnectez Google."); return inspectGoogleUrl(t, project.gscProperty!, project.websiteUrl); }) : Promise.resolve({ status: "unconfigured" as const }),
     ]);
     await db.audit.update({ where: { id: audit.id }, data: { status: "ANALYZING" } });
     const findings = crawl.status === "available" ? technicalFindings(crawl.data) : [];
@@ -34,7 +35,7 @@ export async function runAudit(userId: string, projectId: string, headers: Heade
       }
     }
     const status = (crawl.status === "available" && crawl.data.pages.length > 0) || gsc.status === "available" || ga4.status === "available" ? "COMPLETE" : "FAILED";
-    const evidence = JSON.parse(JSON.stringify({ collectedAt: new Date().toISOString(), methodology: knowledgeMetadata, crawl, gsc, ga4, performance, competitors }));
+    const evidence = JSON.parse(JSON.stringify({ collectedAt: new Date().toISOString(), methodology: knowledgeMetadata, crawl, gsc, ga4, performance, competitors, inspection }));
     await db.audit.update({ where: { id: audit.id }, data: { status, completedAt: new Date(), rawEvidence: evidence, findings: { create: findings } } });
     if (status === "COMPLETE") await db.project.update({ where: { id: projectId }, data: { onboardingDone: true } });
     return { id: audit.id, status, findings: findings.length };

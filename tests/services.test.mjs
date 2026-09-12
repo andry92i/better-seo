@@ -73,7 +73,7 @@ test("upstream canonical case fix handles mixed-case rel attributes",()=>{
 test("cover commands route both supported slash spellings",async()=>{
  const {selectWorkflow}=await import('../src/lib/claude-seo/workflows.ts');
  for(const prefix of ['/seo ', '/seo-']) {
-  assert.equal(selectWorkflow('content-plan',prefix+'schema example.com'),'technical-sprint');
+  assert.equal(selectWorkflow('content-plan',prefix+'schema example.com'),'schema-analysis');
   assert.equal(selectWorkflow('content-plan',prefix+'backlinks rival.com'),'backlinks');
   assert.equal(selectWorkflow('content-plan',prefix+'geo my homepage'),'ai-search');
  }
@@ -95,4 +95,65 @@ test("production canonical never inherits a localhost auth origin",async()=>{
  const {canonicalOrigin}=await import('../src/lib/site.ts');
  for(const value of ['http://localhost:3000','https://localhost','not a URL','https://user:password@example.org','https://preview.internal']) assert.equal(canonicalOrigin(value),'https://better-seo-five.vercel.app');
  assert.equal(canonicalOrigin('https://www.example.org/path'),'https://www.example.org');
+});
+
+
+test("rich crawl evidence preserves alternate URLs, JSON-LD and image semantics",()=>{
+ const p=inspectHtml("https://example.org/en", '<html lang="en"><head><link hreflang="fr" href="https://example.org/fr"><script type="application/ld+json">{"@type":"Product","name":"Actual product"}</script></head><body><h1>Product</h1><h3>Details</h3><img src="x" alt="" width="30" height="20"><img data-src="photo.jpg"></body></html>');
+ assert.deepEqual(p.alternates,[{language:'fr',href:'https://example.org/fr'}]);
+ assert.equal(p.structuredData[0].json.name,'Actual product');
+ assert.equal(p.imageDetails[0].alt,'');assert.equal(p.imageDetails[1].loading,'javascript');
+ assert.equal(p.language,'en');assert.equal(p.headings[1].level,3);
+});
+test("sitemap parser separates indexes and rejects external or private-format targets",async()=>{
+ const {inspectSitemap}=await import('../src/lib/seo/crawl.ts');
+ const r=inspectSitemap('<sitemapindex><sitemap><loc>https://example.org/a.xml</loc></sitemap><sitemap><loc>https://evil.org/a.xml</loc></sitemap></sitemapindex>','https://example.org');
+ assert.deepEqual(r,{pages:[],sitemaps:['https://example.org/a.xml']});
+ const p=inspectSitemap('<urlset><url><loc>https://example.org/en</loc></url><url><loc>http://example.org/a</loc></url></urlset>','https://example.org');assert.deepEqual(p.pages,['https://example.org/en']);
+});
+test("international checks distinguish observed broken reciprocity from missing evidence",async()=>{
+ const {analyzeEvidence}=await import('../src/lib/seo/analysis.ts');
+ const a=inspectHtml('https://example.org/en','<link hreflang="fr" href="https://example.org/fr"><link hreflang="de" href="https://example.org/de">');
+ const b=inspectHtml('https://example.org/fr','<h1>Page</h1>');
+ const result=analyzeEvidence({crawl:{data:{pages:[a,b]}}},'international');
+ assert.ok(result.rows.some(r=>r.check==='missing-return-alternate'));
+ assert.ok(result.rows.some(r=>r.check==='alternate-not-in-sample'));
+ assert.ok(result.rows.some(r=>r.check==='missing-self-alternate'));
+ assert.equal(analyzeEvidence({},'international').status,'unavailable');
+});
+test("drift uses only comparable snapshots and never treats omitted sample URLs as deleted",async()=>{
+ const {analyzeEvidence}=await import('../src/lib/seo/analysis.ts');
+ const page=inspectHtml('https://example.org/a','<title>New title</title>');
+ const now={crawl:{data:{pages:[page]}}};const before={crawl:{data:{pages:[{...page,title:'Old title'},{...page,url:'https://example.org/b'}]}}};
+ assert.equal(analyzeEvidence(now,'drift').status,'unavailable');
+ const result=analyzeEvidence(now,'drift',before);
+ assert.ok(result.rows.some(r=>r.check==='changed-title'&&r.observed.before==='Old title'));
+ assert.ok(result.rows.some(r=>r.check==='absent-from-sample'&&/does not establish deletion/.test(r.interpretation)));
+});
+test("GSC shortlist preserves missing previous rows as unknown and stable pagination",async()=>{
+ const {analyzeEvidence}=await import('../src/lib/seo/analysis.ts');
+ const rows=Array.from({length:22},(_,i)=>({keys:['query'+i,'https://example.org/'+i],clicks:5,impressions:200+i,ctr:0.02,position:8}));
+ const e={gsc:{data:{rows,previous:[],coverage:'top rows'}}};
+ const first=analyzeEvidence(e,'opportunities'),second=analyzeEvidence(e,'opportunities',undefined,first.nextOffset);
+ assert.equal(first.rows.length,20);assert.equal(second.rows.length,2);assert.equal(second.nextOffset,null);
+ assert.equal(first.rows[0].observed.clickChange,null);assert.equal(first.rows[0].observed.previous,null);
+ assert.equal(rows[0].impressions,200);
+});
+test("Google URL inspection honors property boundaries",async()=>{
+ const {belongsToProperty}=await import('../src/lib/google/inspection.ts');
+ assert.equal(belongsToProperty('https://blog.example.org/a','sc-domain:example.org'),true);
+ for(const url of ['https://example.org.evil.com/','https://notexample.org/','https://user:secret@example.org/']) assert.equal(belongsToProperty(url,'sc-domain:example.org'),false);
+ assert.equal(belongsToProperty('https://example.org/blog/a','https://example.org/blog/'),true);
+ assert.equal(belongsToProperty('https://example.org/blogger/a','https://example.org/blog/'),false);
+});
+test("all task suggestions map to specific workflows and prepare editable requests",async()=>{
+ const {seoTasks,taskPrompt}=await import('../src/lib/claude-seo/tasks.ts');
+ const {selectWorkflow,workflows}=await import('../src/lib/claude-seo/workflows.ts');
+ assert.equal(new Set(seoTasks.map(t=>t.command)).size,seoTasks.length);
+ for(const task of seoTasks) for(const locale of ['en','fr']) {
+  const prompt=taskPrompt(task,locale,'https://example.org');assert.match(prompt,/https:\/\/example.org/);
+  assert.ok(workflows[selectWorkflow('unknown',prompt)]);assert.ok(task.needs[locale]);
+ }
+ assert.equal(selectWorkflow('unknown','/seo content my blog'),'content-review');
+ assert.equal(selectWorkflow('unknown','/seo write my blog'),'rewrite-landing');
 });

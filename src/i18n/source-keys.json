@@ -330,5 +330,11 @@
   "Export partiel. Les domaines peuvent désigner des sources ou des cibles selon le rapport importé. Aucun score d’autorité calculé.": "partial_export_domains_may_be_47f86a",
   "insufficient_traffic": "insufficient_traffic_f21645",
   "L’assistant est temporairement indisponible. Réessayez plus tard.": "assistant_unavailable",
-  "La réponse a été interrompue. Réessayez dans un instant.": "response_interrupted"
+  "La réponse a été interrompue. Réessayez dans un instant.": "response_interrupted",
+  "Audit SEO complet": "full_audit_title",
+  "Analyse de page": "page_analysis_title",
+  "Données structurées": "schema_analysis_title",
+  "Sitemap et maillage": "sitemap_analysis_title",
+  "SEO des images": "image_analysis_title",
+  "Qualité éditoriale": "content_review_title"
 }

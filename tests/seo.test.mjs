@@ -112,6 +112,9 @@ test('resource URLs select their language, canonical and reciprocal alternates',
   assert.match(html,/hreflang="en"/i);assert.match(html,/hreflang="fr"/i);
   assert.match(html,new RegExp(`/${locale}/resources/technical-seo-audit`));
   assert.match(html,/BreadcrumbList/);
+  const indexHtml=await(await fetch(origin+`/${locale}/resources`)).text();
+  const indexTitle=indexHtml.match(/<title>(.*?)<\/title>/)?.[1] ?? '';
+  assert.equal((indexTitle.match(/Better SEO/g) ?? []).length,1);
  }
  assert.equal((await fetch(origin+'/en/resources/missing-resource')).status,404);
  assert.equal((await fetch(origin+'/es/resources')).status,404);

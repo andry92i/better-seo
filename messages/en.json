@@ -332,7 +332,13 @@
     "partial_export_domains_may_be_47f86a": "Partial export. Domains may be sources or targets depending on the imported report. No authority score is calculated.",
     "insufficient_traffic_f21645": "Insufficient traffic",
     "assistant_unavailable": "The assistant is temporarily unavailable. Please try again later.",
-    "response_interrupted": "The response was interrupted. Please try again shortly."
+    "response_interrupted": "The response was interrupted. Please try again shortly.",
+    "full_audit_title": "Complete SEO audit",
+    "page_analysis_title": "Page analysis",
+    "schema_analysis_title": "Structured data",
+    "sitemap_analysis_title": "Sitemap and internal links",
+    "image_analysis_title": "Image SEO",
+    "content_review_title": "Content quality"
   },
   "workspace": {
     "account": "My account",

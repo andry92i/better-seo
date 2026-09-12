@@ -1,0 +1,141 @@
+{
+  "pages": [
+    {
+      "url": "https://better-seo-five.vercel.app/",
+      "title": "Better SEO \u2014 Your AI SEO engineer",
+      "description": "Turn Search Console and Analytics data into a prioritized SEO strategy and measurable actions.",
+      "templated": false,
+      "severity": "none",
+      "cta_phrase": null,
+      "flags": [],
+      "signals": []
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/en/resources",
+      "title": "SEO guides and evidence-led workflows | Better SEO \u00b7 Better SEO",
+      "description": "Practical guides to Search Console, technical audits and SEO content. Understand the data, methods and coverage behind Better SEO.",
+      "templated": false,
+      "severity": "none",
+      "cta_phrase": null,
+      "flags": [],
+      "signals": []
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/fr/resources/seo-content-brief",
+      "title": "Cr\u00e9er un brief de contenu SEO \u00e0 partir de preuves utiles",
+      "description": "Pr\u00e9parez un brief avec audience, intention, sources, plan et liens internes avant de r\u00e9diger un article ou une landing page dans Better SEO.",
+      "templated": false,
+      "severity": "none",
+      "cta_phrase": null,
+      "flags": [],
+      "signals": []
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/fr/resources/search-console-vs-analytics",
+      "title": "Search Console et Google Analytics : bien lire le SEO",
+      "description": "Comprenez pourquoi clics Search Console et sessions Analytics diff\u00e8rent, puis utilisez les deux sources pour analyser le SEO sans conclusions h\u00e2tives.",
+      "templated": false,
+      "severity": "none",
+      "cta_phrase": null,
+      "flags": [],
+      "signals": []
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/fr/resources/seo-methodology",
+      "title": "Comment Better SEO construit ses recommandations SEO",
+      "description": "D\u00e9couvrez les sources de Better SEO, le r\u00f4le de Claude SEO et les limites de couverture pour les donn\u00e9es priv\u00e9es, les backlinks et les recommandations IA.",
+      "templated": false,
+      "severity": "none",
+      "cta_phrase": null,
+      "flags": [],
+      "signals": []
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/en/resources/technical-seo-audit",
+      "title": "Technical SEO audit: find and prioritize website problems",
+      "description": "Learn how Better SEO checks server HTML, page metadata and performance evidence, then turns observed issues into a practical technical SEO work plan.",
+      "templated": false,
+      "severity": "none",
+      "cta_phrase": null,
+      "flags": [],
+      "signals": []
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/en/resources/search-console-opportunities",
+      "title": "Find SEO opportunities in your Google Search Console data",
+      "description": "Use your own Search Console queries, clicks, impressions and pages to prioritize SEO work without confusing observed impressions with keyword search volume.",
+      "templated": false,
+      "severity": "none",
+      "cta_phrase": null,
+      "flags": [],
+      "signals": []
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/en/resources/seo-content-brief",
+      "title": "Build an SEO content brief from search and page evidence",
+      "description": "Create a useful content brief with audience, intent, evidence, outline and internal links before drafting an article or landing page in Better SEO.",
+      "templated": false,
+      "severity": "none",
+      "cta_phrase": null,
+      "flags": [],
+      "signals": []
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/en/resources/search-console-vs-analytics",
+      "title": "Search Console vs Google Analytics: read SEO data clearly",
+      "description": "Understand why Search Console clicks and Google Analytics sessions differ, and use both sources to investigate SEO performance without false conclusions.",
+      "templated": false,
+      "severity": "none",
+      "cta_phrase": null,
+      "flags": [],
+      "signals": []
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/en/resources/seo-methodology",
+      "title": "How Better SEO builds recommendations from your evidence",
+      "description": "See which sources Better SEO uses, how Claude SEO guides analysis and where coverage ends, including private data, backlinks and AI recommendations.",
+      "templated": false,
+      "severity": "none",
+      "cta_phrase": null,
+      "flags": [],
+      "signals": []
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/fr/resources",
+      "title": "Guides SEO et m\u00e9thode d\u2019analyse | Better SEO \u00b7 Better SEO",
+      "description": "Guides pratiques sur Search Console, les audits techniques et les contenus SEO. Comprenez les donn\u00e9es, les m\u00e9thodes et les limites de Better SEO.",
+      "templated": false,
+      "severity": "none",
+      "cta_phrase": null,
+      "flags": [],
+      "signals": []
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/fr/resources/technical-seo-audit",
+      "title": "Audit SEO technique : identifier et prioriser les probl\u00e8mes",
+      "description": "D\u00e9couvrez les contr\u00f4les HTML, m\u00e9tadonn\u00e9es et performances de Better SEO pour transformer les probl\u00e8mes observ\u00e9s en t\u00e2ches techniques concr\u00e8tes.",
+      "templated": false,
+      "severity": "none",
+      "cta_phrase": null,
+      "flags": [],
+      "signals": []
+    },
+    {
+      "url": "https://better-seo-five.vercel.app/fr/resources/search-console-opportunities",
+      "title": "Identifier les opportunit\u00e9s SEO avec Google Search Console",
+      "description": "Exploitez vos requ\u00eates, clics, impressions et pages Search Console pour prioriser les am\u00e9liorations SEO sans inventer de volumes de recherche.",
+      "templated": false,
+      "severity": "none",
+      "cta_phrase": null,
+      "flags": [],
+      "signals": []
+    }
+  ],
+  "pages_checked": 13,
+  "templated_count": 0,
+  "templated_ratio": 0.0,
+  "shared_cta_phrases": {},
+  "site_flags": [],
+  "site_risk": "low",
+  "method": "heuristic"
+}
